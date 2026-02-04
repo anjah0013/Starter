@@ -16,46 +16,88 @@ export default function heroSlider() {
 
     // Initialize first slide
     function init() {
-        slides[0].classList.add('active');
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active', 'prev-slide', 'next-slide', 'exiting', 'exiting-left', 'exiting-right');
+            if (i === 0) {
+                slide.classList.add('active');
+            } else if (i === 1) {
+                slide.classList.add('next-slide');
+            } else if (i === slides.length - 1) {
+                slide.classList.add('prev-slide');
+            }
+        });
         if (dots.length > 0) {
             dots[0].classList.add('active');
         }
         startAutoPlay();
     }
 
-    // Show specific slide
-    function showSlide(index) {
-        // Remove active class from current slide and dot
-        slides[currentSlide].classList.remove('active');
+    // Show specific slide with stacking animation
+    function showSlide(newIndex, direction = 'next') {
+        if (newIndex === currentSlide) return;
+
+        // Calculate actual index with wrapping
+        let targetIndex = newIndex;
+        if (targetIndex >= slides.length) {
+            targetIndex = 0;
+        } else if (targetIndex < 0) {
+            targetIndex = slides.length - 1;
+        }
+
+        // Determine direction if not specified
+        if (direction === 'auto') {
+            direction = targetIndex > currentSlide ? 'next' : 'prev';
+            // Handle wrap-around cases
+            if (currentSlide === slides.length - 1 && targetIndex === 0) {
+                direction = 'next';
+            } else if (currentSlide === 0 && targetIndex === slides.length - 1) {
+                direction = 'prev';
+            }
+        }
+
+        // Prepare the next slide (position it underneath)
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active', 'prev-slide', 'next-slide', 'exiting', 'exiting-left', 'exiting-right');
+            
+            if (i === targetIndex) {
+                // This will be the new active slide
+                slide.classList.add('active');
+            } else if (i === currentSlide) {
+                // Current slide slides away
+                slide.classList.add('exiting');
+                if (direction === 'next') {
+                    slide.classList.add('exiting-left');
+                } else {
+                    slide.classList.add('exiting-right');
+                }
+            }
+        });
+
+        // Update dot navigation
         if (dots.length > 0) {
             dots[currentSlide].classList.remove('active');
+            dots[targetIndex].classList.add('active');
         }
 
         // Update current slide index
-        currentSlide = index;
+        currentSlide = targetIndex;
 
-        // Handle wrapping
-        if (currentSlide >= slides.length) {
-            currentSlide = 0;
-        } else if (currentSlide < 0) {
-            currentSlide = slides.length - 1;
-        }
-
-        // Add active class to new slide and dot
-        slides[currentSlide].classList.add('active');
-        if (dots.length > 0) {
-            dots[currentSlide].classList.add('active');
-        }
+        // Clean up exiting class after animation completes
+        setTimeout(() => {
+            slides.forEach(slide => {
+                slide.classList.remove('exiting', 'exiting-left', 'exiting-right');
+            });
+        }, 800);
     }
 
     // Next slide
     function nextSlide() {
-        showSlide(currentSlide + 1);
+        showSlide(currentSlide + 1, 'next');
     }
 
     // Previous slide
     function prevSlide() {
-        showSlide(currentSlide - 1);
+        showSlide(currentSlide - 1, 'prev');
     }
 
     // Start autoplay

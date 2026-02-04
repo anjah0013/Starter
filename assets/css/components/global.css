@@ -22,7 +22,7 @@ body {
     line-height: 1.6em;
     font-weight: 400;
     font-style: normal;
-    background: #fff;
+    background: linear-gradient(135deg, #fffef9 0%, #fffdf4 35%, #fff9e6 70%, #fff5dc 100%);
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

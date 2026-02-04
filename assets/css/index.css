@@ -38,7 +38,6 @@ html,
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: #ffffff;
 }
 
 .gh-main {
@@ -49,6 +48,7 @@ html,
 
 .gh-page {
     padding: 0 4vmin;
+    background: transparent;
 }
 
 .gh-article {
@@ -94,6 +94,13 @@ html,
 
 /* Index
 /* ---------------------------------------------------------- */
+
+.gh-card {
+    position: relative;
+    padding: 4vmin;
+    background: transparent;
+    border-radius: 5px;
+}
 
 /* .gh-card:not(:first-child) {
     margin: 8vmin auto 0;
@@ -156,6 +163,7 @@ html,
     margin: 0 auto;
     padding: 8vmin 0 4vmin;
     text-align: center;
+    background: transparent;
 }
 
 .gh-page-image {
@@ -608,7 +616,7 @@ html,
 
 .gh-blog-title-section {
     padding: 3vmin 4vmin;
-    background: #fff;
+    background: transparent;
     border-bottom: 1px solid rgba(128, 0, 32, 0.1);
     text-align: center;
 }

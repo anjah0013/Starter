@@ -6,6 +6,7 @@
     max-width: 600px;
     margin: 0 auto 10vmin;
     text-align: center;
+    background: transparent;
 }
 
 .gh-auth-title {

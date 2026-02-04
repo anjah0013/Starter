@@ -5,6 +5,9 @@ production stylesheet in assets/built/screen.css using: npm run dev
 
 */
 
+/* Google Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap');
+
 /* Lib - Local component imports
 /* ---------------------------------------------------------- */
 
@@ -137,6 +140,7 @@ html,
 }
 
 .gh-card-content > strong {
+    color: #800020;
     display: inline-block;
     padding: 1px 0;
     font-weight: 500;
@@ -427,7 +431,8 @@ html,
     line-height: 1.0;
     color: #2d2d2d;
     margin: 0 0 1.5rem 0;
-    font-family: var(--font-sans-serif);
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    letter-spacing: -0.5px;
 }
 
 .gh-hero-excerpt {
@@ -596,4 +601,61 @@ html,
         font-size: 0.9rem;
     }
 }
+
+
+/* Blog Title Section
+/* ---------------------------------------------------------- */
+
+.gh-blog-title-section {
+    padding: 3vmin 4vmin;
+    background: #fff;
+    border-bottom: 1px solid rgba(128, 0, 32, 0.1);
+    text-align: center;
+}
+
+.gh-blog-title-section .gh-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gh-blog-title {
+    display: block;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #800020;
+    text-decoration: none;
+    line-height: 1.2;
+    transition: color 0.3s ease;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    letter-spacing: -0.5px;
+}
+
+.gh-blog-title:hover {
+    color: #a04060;
+}
+
+.gh-blog-title img {
+    max-height: 60px;
+    width: auto;
+}
+
+@media (max-width: 900px) {
+    .gh-blog-title {
+        font-size: 2.4rem;
+    }
+    .gh-blog-title img {
+        max-height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gh-blog-title {
+        font-size: 1.8rem;
+    }
+    .gh-blog-title img {
+        max-height: 40px;
+    }
+}
+
 

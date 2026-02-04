@@ -1,5 +1,18 @@
 {{!< default}}
 
+{{!-- Blog Title Section --}}
+<section class="gh-blog-title-section">
+    <div class="gh-container">
+        <a class="gh-blog-title" href="{{@site.url}}">
+            {{#if @site.logo}}
+                <img src="{{@site.logo}}" alt="{{@site.title}}" />
+            {{else}}
+                {{@site.title}}
+            {{/if}}
+        </a>
+    </div>
+</section>
+
 {{!-- Hero Section with Featured Posts Slider --}}
 {{> "hero"}}
 

@@ -1,0 +1,42 @@
+{{!-- Hero Section - Featured Posts Slider --}}
+{{#get "posts" filter="featured:true" limit="5" as |featured_posts|}}
+{{#if featured_posts}}
+<section class="gh-hero-section">
+    <div class="gh-hero-container">
+        {{#foreach featured_posts}}
+        <div class="gh-hero-slide" data-index="{{@index}}">
+            <div class="gh-hero-image-wrapper">
+                {{#if feature_image}}
+                <img class="gh-hero-image" src="{{img_url feature_image size="xl"}}" alt="{{title}}">
+                {{else}}
+                <div class="gh-hero-image-placeholder"></div>
+                {{/if}}
+            </div>
+            <div class="gh-hero-content">
+                <div class="gh-hero-text">
+                    <h2 class="gh-hero-title">{{title}}</h2>
+                    <p class="gh-hero-excerpt">{{excerpt words="30"}}</p>
+                    <a href="{{url}}" class="gh-hero-button">Read More</a>
+                </div>
+            </div>
+        </div>
+        {{/foreach}}
+        
+        {{!-- Navigation Dots --}}
+        <div class="gh-hero-dots">
+            {{#foreach featured_posts}}
+            <button class="gh-hero-dot" data-index="{{@index}}" aria-label="Go to slide {{@number}}"></button>
+            {{/foreach}}
+        </div>
+        
+        {{!-- Navigation Arrows --}}
+        <button class="gh-hero-prev" aria-label="Previous slide">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button class="gh-hero-next" aria-label="Next slide">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+    </div>
+</section>
+{{/if}}
+{{/get}}

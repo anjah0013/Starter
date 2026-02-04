@@ -256,3 +256,251 @@ html,
         font-size: 1.6rem;
     }
 }
+
+
+/* Hero Section - Featured Posts Slider
+/* ---------------------------------------------------------- */
+
+.gh-hero-section {
+    width: 100%;
+    min-height: 500px;
+    max-height: 600px;
+    background: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.gh-hero-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    max-height: 600px;
+    position: relative;
+}
+
+.gh-hero-slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.gh-hero-slide.active {
+    display: flex;
+}
+
+.gh-hero-image-wrapper {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.gh-hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.gh-hero-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+}
+
+.gh-hero-content {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ffe4ec 0%, #ffdde5 50%, #ffd1dc 100%);
+    padding: 4rem;
+    position: relative;
+}
+
+.gh-hero-text {
+    max-width: 480px;
+    text-align: center;
+    transform: translateY(-11rem);
+}
+
+.gh-hero-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #2d2d2d;
+    margin: 0 0 1.5rem 0;
+    font-family: var(--font-sans-serif);
+}
+
+.gh-hero-excerpt {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: #555555;
+    margin: 0 0 2rem 0;
+    font-family: var(--font-sans-serif);
+}
+
+.gh-hero-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: #ffc0cb;
+    color: #2d2d2d;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    border: 2px solid #2d2d2d;
+}
+
+.gh-hero-button:hover {
+    background: #800020;
+    color: #ffe4ec;
+    border-color: transparent;
+}
+
+/* Navigation Dots */
+.gh-hero-dots {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    display: flex;
+    gap: 0.75rem;
+    z-index: 10;
+}
+
+.gh-hero-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #2d2d2d;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.gh-hero-dot.active {
+    background: #2d2d2d;
+}
+
+.gh-hero-dot:hover {
+    background: rgba(45, 45, 45, 0.5);
+}
+
+/* Navigation Arrows */
+.gh-hero-prev,
+.gh-hero-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    color: #2d2d2d;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.gh-hero-prev {
+    left: 1rem;
+}
+
+.gh-hero-next {
+    right: 1rem;
+}
+
+.gh-hero-prev:hover,
+.gh-hero-next:hover {
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.gh-hero-prev svg,
+.gh-hero-next svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .gh-hero-section,
+    .gh-hero-container {
+        min-height: 400px;
+        max-height: none;
+    }
+
+    .gh-hero-slide.active {
+        flex-direction: column;
+    }
+
+    .gh-hero-image-wrapper {
+        width: 100%;
+        height: 250px;
+    }
+
+    .gh-hero-content {
+        width: 100%;
+        padding: 2.5rem;
+        min-height: 300px;
+    }
+
+    .gh-hero-title {
+        font-size: 2rem;
+    }
+
+    .gh-hero-excerpt {
+        font-size: 1rem;
+    }
+
+    .gh-hero-prev,
+    .gh-hero-next {
+        top: 50%;
+    }
+
+    .gh-hero-prev {
+        left: 1rem;
+    }
+
+    .gh-hero-next {
+        right: 1rem;
+    }
+
+    .gh-hero-dots {
+        bottom: 1rem;
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 480px) {
+    .gh-hero-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .gh-hero-title {
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+    }
+
+    .gh-hero-button {
+        padding: 0.875rem 2rem;
+        font-size: 0.9rem;
+    }
+}
+

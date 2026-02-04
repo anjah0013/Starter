@@ -1,0 +1,211 @@
+/* Carousel Styles (Hero Section)
+/* ---------------------------------------------------------- */
+
+.featured-carousel {
+    position: relative;
+    width: 100%;
+    /* Min-height for hero section - adjust as needed for desired impact */
+    min-height: 70vh; /* Make it take up more vertical space */
+    margin-bottom: 8vmin;
+    overflow: hidden;
+    display: flex; /* Use flex to center content */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+}
+
+.carousel-inner {
+    position: absolute; /* Position inner to fill carousel */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    /* transition is handled by fade/slide classes now */
+}
+
+.carousel-item {
+    min-width: 100%;
+    height: 100%;
+    position: absolute; /* Position items absolutely for stacking */
+    top: 0;
+    left: 0;
+    opacity: 0; /* Hidden by default for fade */
+    transition: opacity 0.7s ease-in-out; /* Smooth fade transition */
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.featured-carousel[data-carousel-transition="slide"] .carousel-item {
+    transition: none; /* No opacity transition for slide */
+    opacity: 1;
+    position: relative; /* Back to relative for slide */
+    display: none;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.featured-carousel[data-carousel-transition="slide"] .carousel-item.active {
+    display: flex; /* Show active item for slide */
+}
+
+.carousel-item.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.carousel-post-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white; /* Text color for hero content */
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.carousel-post-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Behind content and overlay */
+}
+
+.carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black; /* Default will be overridden by JS */
+    opacity: 0.5; /* Default will be overridden by JS */
+    z-index: 0; /* Between image and content */
+}
+
+.carousel-post-content {
+    position: relative; /* Above overlay */
+    z-index: 1;
+    max-width: 800px; /* Constrain content width */
+    padding: 0 4vmin;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Add text shadow for readability */
+}
+
+.carousel-post-title {
+    font-size: 6vmin; /* Larger for hero section */
+    margin-bottom: 2vmin;
+    line-height: 1.1;
+}
+
+.carousel-post-excerpt {
+    font-size: 2.8vmin; /* Larger for hero section */
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+/* Carousel Controls (Prev/Next Buttons) */
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 1.5vmin 2.5vmin; /* Slightly larger buttons */
+    font-size: 5vmin;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+    border-radius: 5px; /* Rounded corners for buttons */
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-control-prev {
+    left: 2vmin; /* Offset from edge */
+}
+
+.carousel-control-next {
+    right: 2vmin; /* Offset from edge */
+}
+
+/* Carousel Indicators */
+.carousel-indicators {
+    position: absolute;
+    bottom: 3vmin; /* Lower position */
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5vmin; /* More space between indicators */
+    z-index: 10;
+}
+
+.indicator {
+    width: 2.5vmin; /* Slightly larger indicators */
+    height: 2.5vmin;
+    background-color: rgba(255, 255, 255, 0.6); /* Slightly more opaque */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.indicator.active,
+.indicator:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .featured-carousel {
+        min-height: 60vh; /* Adjust height for smaller screens */
+    }
+
+    .carousel-post-title {
+        font-size: 7vmin;
+    }
+
+    .carousel-post-excerpt {
+        font-size: 3.5vmin;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        padding: 2vmin 3vmin;
+        font-size: 6vmin;
+    }
+
+    .indicator {
+        width: 3vmin;
+        height: 3vmin;
+    }
+}
+
+@media (max-width: 480px) {
+    .featured-carousel {
+        min-height: 50vh; /* Further adjust height for very small screens */
+    }
+
+    .carousel-post-title {
+        font-size: 8vmin;
+    }
+
+    .carousel-post-excerpt {
+        font-size: 4vmin;
+    }
+    .carousel-control-prev,
+    .carousel-control-next {
+        padding: 1.5vmin 2.5vmin;
+        font-size: 5vmin;
+    }
+}
+

@@ -2,56 +2,51 @@
 /* ---------------------------------------------------------- */
 
 .gh-foot {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 8vmin 4vmin 4vmin;
+    text-align: center;
 }
 
 .gh-foot .gh-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: auto;
 }
 
 .gh-foot a {
     color: inherit;
+    text-decoration: none;
+}
+
+.gh-foot-meta {
+    margin: 2rem 0 1rem; /* Adjusted margin to provide space between copyright and social links */
+    font-size: 1.5rem;
+    opacity: 0.75;
 }
 
 .gh-foot-menu {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    gap: 20px; /* Space between social media icons */
+    margin-bottom: 2rem; /* Space below social links */
 }
 
-.gh-foot-menu .nav {
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    list-style: none;
-    font-size: 1.8rem;
+.gh-foot-menu svg {
+    height: 24px; /* Size of social media icons */
+    width: 24px;
+    fill: currentColor;
+    transition: opacity 0.2s ease-in-out;
 }
 
-.gh-foot-menu .nav li {
-    margin: 0 1.5vmin;
-    padding: 0;
-}
-
-.gh-foot-menu .nav a {
-    display: inline-block;
-    padding: 3px 0;
-    text-decoration: none;
-    box-shadow: 0 -1px 0 0 currentcolor inset;
-}
-
-.gh-foot-meta {
-    margin: 2rem 0;
-    font-size: 1.5rem;
-    text-align: center;
-    opacity: 0.75;
+.gh-foot-menu a:hover svg {
+    opacity: 0.8;
 }
 
 @media (max-width: 700px) {
-    .gh-foot-menu .nav {
-        font-size: 1.6rem;
+    .gh-foot-meta {
+        font-size: 1.4rem;
+    }
+    .gh-foot-menu {
+        gap: 15px;
     }
 }
+

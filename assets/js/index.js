@@ -7,7 +7,7 @@ import "../css/index.css";
 import menuOpen from "./menuOpen";
 import infiniteScroll from "./infiniteScroll";
 import heroSlider from "./heroSlider";
-
+import "./morePosts";
 
 // Call the menu and infinite scroll functions
 menuOpen();

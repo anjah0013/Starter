@@ -52,6 +52,7 @@
     justify-content: center;
     grid-column: 1 / -1;
     position: relative;
+    gap: 4vmin;
 }
 
 .gh-head-menu .nav {
@@ -61,6 +62,18 @@
     justify-content: center;
     list-style: none;
     gap: 3vmin;
+}
+
+.gh-head-menu .gh-nav-link {
+    color: #800020;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+
+.gh-head-menu .gh-nav-link:hover {
+    color: #a04060;
 }
 
 /* Search and Subscribe in Menu */

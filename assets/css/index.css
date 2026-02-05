@@ -703,6 +703,24 @@ html,
 }
 
 
+.gh-postfeed-all {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+    gap: 4.8vmin 4vmin;
+    padding: 4vmin 0;
+}
+
+.gh-page-title {
+    font-size: 4.8rem;
+    font-weight: 700;
+    color: #800020;
+    margin: 0;
+    margin-top: 8vmin;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    letter-spacing: -0.5px;
+    text-align: center;
+}
+
 /* Blog Title Section
 /* ---------------------------------------------------------- */
 

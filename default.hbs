@@ -12,6 +12,26 @@
     {{ghost_head}}
     {{!-- Outputs important meta data and settings, should always be in <head> --}}
 
+    <style>
+        .gh-postfeed-all {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+            gap: 4.8vmin 4vmin;
+            padding: 4vmin 0;
+        }
+
+        .gh-page-title {
+            font-size: 4.8rem;
+            font-weight: 700;
+            color: #800020;
+            margin: 0;
+            margin-top: 8vmin;
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            letter-spacing: -0.5px;
+            text-align: center;
+        }
+    </style>
+
 </head>
 <body class="{{body_class}}">
 <div class="gh-viewport">
@@ -34,7 +54,9 @@
             </a>
         </div>
         <div class="gh-head-menu">
-            {{navigation}}
+            <a href="{{@site.url}}" class="gh-nav-link">Home</a>
+            <a href="/about/" class="gh-nav-link">About</a>
+            <a href="/posts/" class="gh-nav-link">Posts</a>
             <div class="gh-menu-actions">
                 {{search}}
                 {{#if @site.members_enabled}}

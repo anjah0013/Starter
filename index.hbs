@@ -22,7 +22,7 @@
             <h2 class="gh-latest-posts-title">Latest Posts</h2>
         </div>
 
-        <div class="gh-postfeed">
+        <div id="posts" class="gh-postfeed">
         {{#foreach posts}}
             {{> "card" page=../pagination.page }} {{!-- partials/card.hbs --}}
         {{/foreach}}

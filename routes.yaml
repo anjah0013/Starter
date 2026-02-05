@@ -1,0 +1,5 @@
+routes:
+  /posts/:
+    controller: channel
+    template: posts
+    filter: none

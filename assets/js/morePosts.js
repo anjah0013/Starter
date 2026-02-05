@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 // Expand - show all posts
                 postfeed.classList.add('gh-postfeed-expanded');
-                morePostsButton.textContent = 'Show Less';
+                morePostsButton.textContent = '← Show Less';
             }
         });
     }

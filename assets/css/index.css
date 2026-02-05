@@ -209,6 +209,7 @@ html,
     margin: 0 auto;
     text-align: center;
     font-size: 1.6rem;
+    color: #4a4a4a;
 }
 
 .gh-card-content p {
@@ -223,7 +224,7 @@ html,
 }
 
 .gh-card-content > strong {
-    color: #800020;
+    color: #4a4a4a;
     display: inline-block;
     padding: 1px 0;
     font-weight: 500;
@@ -265,9 +266,24 @@ html,
 /* Post
 /* ---------------------------------------------------------- */
 
+.gh-article {
+    padding: 8vmin 0;
+    background: transparent;
+}
+
 .gh-header {
     padding: 0 0 8vmin 0;
     text-align: center;
+    background: transparent;
+}
+
+.gh-header .gh-title {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    letter-spacing: -0.5px;
+}
+
+.gh-content {
+    background: transparent;
 }
 
 .gh-post-meta {

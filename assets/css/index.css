@@ -903,9 +903,9 @@ html,
 .gh-card-tag {
     background: rgba(128, 0, 32, 0.1);
     color: #800020;
-    padding: 0.25rem 0.75rem;
-    border-radius: 1rem;
-    font-size: 0.875rem;
+    padding: 0.4rem 1.1rem;
+    border-radius: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 500;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -955,7 +955,7 @@ html,
 
 .gh-card-author {
     color: #666;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-weight: 600;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
@@ -977,8 +977,8 @@ html,
 
 @media (max-width: 600px) {
     .gh-card-tag {
-        font-size: 0.8rem;
-        padding: 0.2rem 0.6rem;
+        font-size: 1.2rem;
+        padding: 0.3rem 0.9rem;
     }
     
     .gh-card-author {

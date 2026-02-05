@@ -1,0 +1,48 @@
+{{!-- Post Filters --}}
+<div class="gh-filters">
+    <div class="gh-container">
+        <div class="gh-filters-header">
+            <h3>Filter Posts</h3>
+            <button class="gh-filters-reset" id="resetFilters">Reset All</button>
+        </div>
+        
+        <div class="gh-filters-controls">
+            <div class="gh-filter-group">
+                <label for="tagFilter">Tags</label>
+                <select id="tagFilter" class="gh-filter-select">
+                    <option value="">All Tags</option>
+                    {{#get "tags" limit="all"}}
+                        {{#foreach tags}}
+                            <option value="{{slug}}">{{name}}</option>
+                        {{/foreach}}
+                    {{/get}}
+                </select>
+            </div>
+            
+            <div class="gh-filter-group">
+                <label for="authorFilter">Authors</label>
+                <select id="authorFilter" class="gh-filter-select">
+                    <option value="">All Authors</option>
+                    {{#get "authors" limit="all"}}
+                        {{#foreach authors}}
+                            <option value="{{slug}}">{{name}}</option>
+                        {{/foreach}}
+                    {{/get}}
+                </select>
+            </div>
+            
+            <div class="gh-filter-group">
+                <label for="sortFilter">Sort By</label>
+                <select id="sortFilter" class="gh-filter-select">
+                    <option value="published_at desc">Latest First</option>
+                    <option value="published_at asc">Oldest First</option>
+                    <option value="title asc">Title A-Z</option>
+                    <option value="title desc">Title Z-A</option>
+                    <option value="featured desc,published_at desc">Featured First</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="gh-filters-active" id="activeFilters"></div>
+    </div>
+</div>

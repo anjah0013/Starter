@@ -1,18 +1,27 @@
 {{!< default}}
 
+{{> "filters"}}
+
 <div class="gh-page">
     <div class="gh-container">
         <header class="gh-page-head">
             <h1 class="gh-page-title">All Posts</h1>
         </header>
 
-        <div class="gh-postfeed-archive">
-            {{#get "posts" limit="all" include="authors,tags"}}
+        <div class="gh-postfeed-archive" id="postsContainer">
+            {{#get "posts" limit="all" include="authors,tags" as |posts|}}
                 {{#foreach posts}}
                     {{> "card"}}
                 {{/foreach}}
-            {{else}}
-                <p>No posts found.</p>
+                {{#if posts}}
+                    <div class="gh-no-results" style="display: none;">
+                        <p>No posts found matching your filters.</p>
+                    </div>
+                {{else}}
+                    <div class="gh-no-results">
+                        <p>No posts found.</p>
+                    </div>
+                {{/if}}
             {{/get}}
         </div>
     </div>

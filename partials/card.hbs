@@ -4,53 +4,78 @@ Re-usable card for linking to posts
 
 <article class="gh-card {{post_class}}">
     <a class="gh-card-link" href="{{url}}">
-        {{#if feature_image}}
-            <picture class="gh-card-picture">
-              <source 
-                srcset="
-                {{img_url feature_image size="xxs" format="avif"}} 30w,
-                {{img_url feature_image size="xs" format="avif"}} 100w,
-                {{img_url feature_image size="s" format="avif"}} 300w,
-                {{img_url feature_image size="m" format="avif"}} 600w,
-                {{img_url feature_image size="l" format="avif"}} 1200w,
-                {{img_url feature_image size="xl" format="avif"}} 2000w"
-                {{^if @first}}sizes="(min-width: 1200px) 1200px, 100vw)"{{else}}sizes="(min-width: 800px) 100vw, 700px"{{/if}}
-                type="image/avif"
-                {{^if @first}}loading="lazy"{{/if}}
-              >
-              <source 
-                srcset="
-                {{img_url feature_image size="xxs" format="webp"}} 30w,
-                {{img_url feature_image size="xs" format="webp"}} 100w,
-                {{img_url feature_image size="s" format="webp"}} 300w,
-                {{img_url feature_image size="m" format="webp"}} 600w,
-                {{img_url feature_image size="l" format="webp"}} 1200w,
-                {{img_url feature_image size="xl" format="webp"}} 2000w"
-                {{^if @first}}sizes="(min-width: 1200px) 1200px, 100vw)"{{else}}sizes="(min-width: 800px) 100vw, 700px"{{/if}}
-                type="image/webp"
-                {{^if @first}}loading="lazy"{{/if}}
+        <div class="gh-card-header">
+            {{#if feature_image}}
+                <picture class="gh-card-picture">
+                  <source 
+                    srcset="
+                    {{img_url feature_image size="xxs" format="avif"}} 30w,
+                    {{img_url feature_image size="xs" format="avif"}} 100w,
+                    {{img_url feature_image size="s" format="avif"}} 300w,
+                    {{img_url feature_image size="m" format="avif"}} 600w,
+                    {{img_url feature_image size="l" format="avif"}} 1200w,
+                    {{img_url feature_image size="xl" format="avif"}} 2000w"
+                    {{^if @first}}sizes="(min-width: 1200px) 1200px, 100vw)"{{else}}sizes="(min-width: 800px) 100vw, 700px"{{/if}}
+                    type="image/avif"
+                    {{^if @first}}loading="lazy"{{/if}}
+                  >
+                  <source 
+                    srcset="
+                    {{img_url feature_image size="xxs" format="webp"}} 30w,
+                    {{img_url feature_image size="xs" format="webp"}} 100w,
+                    {{img_url feature_image size="s" format="webp"}} 300w,
+                    {{img_url feature_image size="m" format="webp"}} 600w,
+                    {{img_url feature_image size="l" format="webp"}} 1200w,
+                    {{img_url feature_image size="xl" format="webp"}} 2000w"
+                    {{^if @first}}sizes="(min-width: 1200px) 1200px, 100vw)"{{else}}sizes="(min-width: 800px) 100vw, 700px"{{/if}}
+                    type="image/webp"
+                    {{^if @first}}loading="lazy"{{/if}}
 
-              >
-              <img
-                srcset="
-                {{img_url feature_image size="xxs"}} 30w,
-                {{img_url feature_image size="xs"}} 100w,
-                {{img_url feature_image size="s"}} 300w,
-                {{img_url feature_image size="m"}} 600w,
-                {{img_url feature_image size="l"}} 1200w,
-                {{img_url feature_image size="xl"}} 2000w"
-                {{^if @first}}sizes="(min-width: 1200px) 1200px, 100vw)"{{else}}sizes="(min-width: 800px) 100vw, 700px"{{/if}}
-                src="{{img_url feature_image size="m"}}"
-                alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
-                class="gh-card-image"
-                {{^if @first}}loading="lazy"{{/if}}
-              >
-            </picture>
-        {{/if}}
-        <div class="gh-card-content">
+                  >
+                  <img
+                    srcset="
+                    {{img_url feature_image size="xxs"}} 30w,
+                    {{img_url feature_image size="xs"}} 100w,
+                    {{img_url feature_image size="s"}} 300w,
+                    {{img_url feature_image size="m"}} 600w,
+                    {{img_url feature_image size="l"}} 1200w,
+                    {{img_url feature_image size="xl"}} 2000w"
+                    {{^if @first}}sizes="(min-width: 1200px) 1200px, 100vw)"{{else}}sizes="(min-width: 800px) 100vw, 700px"{{/if}}
+                    src="{{img_url feature_image size="m"}}"
+                    alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                    class="gh-card-image"
+                    {{^if @first}}loading="lazy"{{/if}}
+                  >
+                </picture>
+            {{/if}}
             <span class="gh-card-meta"><time datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMM YYYY"}}</time> <span class="bull">&bull;</span> {{reading_time}}</span>
+            {{#if authors}}
+                <div class="gh-card-authors">
+                    {{#foreach authors}}
+                        <div class="gh-card-author-item">
+                            {{#if profile_image}}
+                                <img src="{{profile_image}}" alt="{{name}}" class="gh-card-author-avatar">
+                            {{else}}
+                                <div class="gh-card-author-avatar-placeholder">{{#if name}}{{name}}{{/if}}</div>
+                            {{/if}}
+                            <span class="gh-card-author">{{name}}</span>
+                        </div>
+                    {{/foreach}}
+                </div>
+            {{/if}}
+        </div>
+        <div class="gh-card-content">
             <h2 class="gh-card-title">{{title}}</h2>
             <p>{{excerpt}}</p>
+            
+            {{#if tags}}
+                <div class="gh-card-tags">
+                    {{#foreach tags}}
+                        <span class="gh-card-tag">{{name}}</span>
+                    {{/foreach}}
+                </div>
+            {{/if}}
+            
             <strong>Read more</strong>
         </div>
     </a>

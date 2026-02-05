@@ -21,8 +21,18 @@
     </header>
     {{/match}}
 
-    <div class="gh-content gh-canvas">
-        {{content}}
+    <div class="gh-about-content">
+        <div class="gh-author-photo">
+            {{#if primary_author.profile_image}}
+                <img src="{{primary_author.profile_image}}" alt="{{primary_author.name}}" />
+            {{else}}
+                <div class="gh-author-placeholder"></div>
+            {{/if}}
+        </div>
+        
+        <div class="gh-about-text">
+            {{content}}
+        </div>
     </div>
 
 </article>

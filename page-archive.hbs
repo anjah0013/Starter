@@ -6,7 +6,7 @@
             <h1 class="gh-page-title">All Posts</h1>
         </header>
 
-        <div class="gh-postfeed-all">
+        <div class="gh-postfeed-archive">
             {{#get "posts" limit="all" include="authors,tags"}}
                 {{#foreach posts}}
                     {{> "card"}}

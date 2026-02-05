@@ -1,0 +1,78 @@
+/* Archive Page - Row Layout */
+.gh-postfeed-archive {
+    display: flex;
+    flex-direction: column;
+    gap: 6vmin;
+    padding: 4vmin 0;
+}
+
+.gh-postfeed-archive .gh-card {
+    padding: 0;
+}
+
+.gh-postfeed-archive .gh-card-link {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 4vmin;
+    align-items: center;
+    text-decoration: none;
+}
+
+.gh-postfeed-archive .gh-card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.gh-postfeed-archive .gh-card-image {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    margin-bottom: 0;
+    border-radius: 4px;
+    max-height: 160px;
+    object-fit: cover;
+}
+
+.gh-postfeed-archive .gh-card-meta {
+    margin-top: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.gh-postfeed-archive .gh-card-authors {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
+.gh-postfeed-archive .gh-card-content {
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    max-width: none;
+}
+
+.gh-postfeed-archive .gh-card-title {
+    font-size: 3rem;
+    margin-top: 0;
+}
+
+.gh-postfeed-archive .gh-card-content p {
+    padding: 0;
+    margin: 1.5rem 0;
+    font-size: 1.8rem;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+}
+
+@media (max-width: 800px) {
+    .gh-postfeed-archive .gh-card-link {
+        grid-template-columns: 1fr;
+    }
+    
+    .gh-postfeed-archive .gh-card-image {
+        aspect-ratio: 3 / 2;
+    }
+    
+    .gh-postfeed-archive .gh-card-title {
+        font-size: 2.4rem;
+    }
+}

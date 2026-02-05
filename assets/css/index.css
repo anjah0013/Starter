@@ -16,6 +16,7 @@ production stylesheet in assets/built/screen.css using: npm run dev
 @import "components/global.css";
 @import "components/forms.css";
 @import "components/buttons.css";
+@import "components/archive.css";
 
 /* Ghost components */
 @import "ghost/header.css";
@@ -179,6 +180,12 @@ html,
 .gh-card-link {
     display: flex;
     flex-direction: column;
+}
+
+.gh-card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .gh-card-image {
@@ -721,6 +728,105 @@ html,
     text-align: center;
 }
 
+/* About Page Layout
+/* ---------------------------------------------------------- */
+
+.gh-about-content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 6vmin;
+    margin: 4vmin 0 4vmin 8vmin;
+    padding: 0 40px;
+}
+
+.gh-author-photo {
+    position: sticky;
+    top: 4vmin;
+    flex: 0 0 auto;
+}
+
+.gh-author-photo img,
+.gh-author-placeholder {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(128, 0, 32, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.gh-author-placeholder {
+    background: linear-gradient(135deg, #ffe4ec 0%, #ffdde5 50%, #ffd1dc 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #800020;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+}
+
+.gh-about-text {
+    font-size: 1.6rem;
+    line-height: 1.7;
+    color: #4a4a4a;
+    text-align: justify;
+    margin-left: 2vmin;
+    flex: 1 1 auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.gh-about-text h1,
+.gh-about-text h2,
+.gh-about-text h3 {
+    color: #800020;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.gh-about-text p {
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 900px) {
+    .gh-about-content {
+        flex-direction: column;
+        gap: 3vmin;
+        text-align: center;
+    }
+    
+    .gh-author-photo {
+        position: static;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2vmin;
+    }
+    
+    .gh-author-photo img,
+    .gh-author-placeholder {
+        width: 225px;
+        height: 225px;
+    }
+    
+    .gh-about-text {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .gh-author-photo img,
+    .gh-author-placeholder {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .gh-about-text {
+        font-size: 1.5rem;
+    }
+}
+
 /* Blog Title Section
 /* ---------------------------------------------------------- */
 
@@ -773,6 +879,113 @@ html,
     }
     .gh-blog-title img {
         max-height: 40px;
+    }
+}
+
+/* Card Tags and Authors
+/* ---------------------------------------------------------- */
+
+.gh-card-tags {
+    margin: 1rem 0 0.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.gh-card-tag {
+    background: rgba(128, 0, 32, 0.1);
+    color: #800020;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.gh-card-tag:hover {
+    background: rgba(128, 0, 32, 0.2);
+}
+
+.gh-card-authors {
+    margin: 0.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.gh-card-author-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.gh-card-author-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(128, 0, 32, 0.2);
+}
+
+.gh-card-author-avatar-placeholder {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffe4ec 0%, #ffdde5 50%, #ffd1dc 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: #800020;
+    font-weight: 600;
+    border: 1px solid rgba(128, 0, 32, 0.2);
+    overflow: hidden;
+    text-transform: uppercase;
+}
+
+.gh-card-author {
+    color: #666;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.gh-card-content strong {
+    display: block;
+    text-align: right;
+    margin-top: 1rem;
+    color: #800020;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.gh-card-content strong:hover {
+    color: #a04060;
+}
+
+@media (max-width: 600px) {
+    .gh-card-tag {
+        font-size: 0.8rem;
+        padding: 0.2rem 0.6rem;
+    }
+    
+    .gh-card-author {
+        font-size: 0.8rem;
+    }
+    
+    .gh-card-author-avatar {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .gh-card-author-avatar-placeholder {
+        width: 20px;
+        height: 20px;
+        font-size: 0.5625rem;
     }
 }
 

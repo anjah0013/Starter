@@ -1,4 +1,4 @@
-// More Posts functionality - toggle showing all posts
+// More Posts functionality - toggle showing posts 4-6
 document.addEventListener('DOMContentLoaded', function() {
     const morePostsButton = document.querySelector('.gh-more-posts-button');
     const postfeed = document.querySelector('.gh-postfeed');
@@ -9,12 +9,12 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Toggle expanded class
             if (postfeed.classList.contains('gh-postfeed-expanded')) {
-                // Collapse - hide extra posts
+                // Collapse - hide posts 4-6
                 postfeed.classList.remove('gh-postfeed-expanded');
                 morePostsButton.textContent = 'More Posts →';
                 postfeed.scrollIntoView({ behavior: 'smooth', block: 'start' });
             } else {
-                // Expand - show all posts
+                // Expand - show posts 4-6
                 postfeed.classList.add('gh-postfeed-expanded');
                 morePostsButton.textContent = '← Show Less';
             }

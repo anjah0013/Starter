@@ -23,13 +23,13 @@
         </div>
 
         <div id="posts" class="gh-postfeed">
-        {{#foreach posts}}
+        {{#foreach posts limit="6"}}
             {{> "card" page=../pagination.page }} {{!-- partials/card.hbs --}}
         {{/foreach}}
         </div>
 
         <div class="gh-more-posts-container">
-            <a href="#/archive" class="gh-more-posts-button">More Posts →</a>
+            <a href="/archive/" class="gh-more-posts-button">More Posts →</a>
         </div>
 
         {{!-- If JS isn't enabled, fallback to standard pagination --}}

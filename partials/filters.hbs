@@ -1,48 +1,238 @@
-{{!-- Post Filters --}}
-<div class="gh-filters">
+{{!-- Post Filters Redesigned with Multi-Tag Support --}}
+<div class="gh-filters-new">
     <div class="gh-container">
-        <div class="gh-filters-header">
-            <h3>Filter Posts</h3>
-            <button class="gh-filters-reset" id="resetFilters">Reset All</button>
+        <div class="gh-filter-main-toggles">
+            <button class="gh-filter-main-btn" data-toggle="tags">Tags</button>
+            <button class="gh-filter-main-btn" data-toggle="authors">Authors</button>
+            <button class="gh-filter-main-btn" data-toggle="sort">Sort By</button>
+            <button class="gh-filter-reset-new" id="resetFiltersNew">Reset All</button>
         </div>
-        
-        <div class="gh-filters-controls">
-            <div class="gh-filter-group">
-                <label for="tagFilter">Tags</label>
-                <select id="tagFilter" class="gh-filter-select">
-                    <option value="">All Tags</option>
-                    {{#get "tags" limit="all"}}
-                        {{#foreach tags}}
-                            <option value="{{slug}}">{{name}}</option>
-                        {{/foreach}}
-                    {{/get}}
-                </select>
-            </div>
-            
-            <div class="gh-filter-group">
-                <label for="authorFilter">Authors</label>
-                <select id="authorFilter" class="gh-filter-select">
-                    <option value="">All Authors</option>
-                    {{#get "authors" limit="all"}}
-                        {{#foreach authors}}
-                            <option value="{{slug}}">{{name}}</option>
-                        {{/foreach}}
-                    {{/get}}
-                </select>
-            </div>
-            
-            <div class="gh-filter-group">
-                <label for="sortFilter">Sort By</label>
-                <select id="sortFilter" class="gh-filter-select">
-                    <option value="published_at desc">Latest First</option>
-                    <option value="published_at asc">Oldest First</option>
-                    <option value="title asc">Title A-Z</option>
-                    <option value="title desc">Title Z-A</option>
-                    <option value="featured desc,published_at desc">Featured First</option>
-                </select>
+
+        <div class="gh-filter-sub-options" id="options-tags" style="display: none;">
+            <div class="gh-filter-items-grid">
+                {{#get "tags" limit="all"}}
+                    {{#foreach tags}}
+                        <button class="gh-filter-item-btn" data-type="tag" data-slug="tag-{{slug}}">{{name}}</button>
+                    {{/foreach}}
+                {{/get}}
             </div>
         </div>
-        
-        <div class="gh-filters-active" id="activeFilters"></div>
+
+        <div class="gh-filter-sub-options" id="options-authors" style="display: none;">
+            <div class="gh-filter-items-grid">
+                {{#get "authors" limit="all"}}
+                    {{#foreach authors}}
+                        <button class="gh-filter-item-btn" data-type="author" data-slug="author-{{slug}}">{{name}}</button>
+                    {{/foreach}}
+                {{/get}}
+            </div>
+        </div>
+
+        <div class="gh-filter-sub-options" id="options-sort" style="display: none;">
+            <div class="gh-filter-items-grid">
+                <button class="gh-filter-item-btn active" data-type="sort" data-slug="date-desc">Latest First</button>
+                <button class="gh-filter-item-btn" data-type="sort" data-slug="date-asc">Oldest First</button>
+                <button class="gh-filter-item-btn" data-type="sort" data-slug="title-asc">Title A-Z</button>
+            </div>
+        </div>
     </div>
 </div>
+
+<style>
+.gh-filters-new {
+    padding: 4vmin 0;
+    border-bottom: 1px solid rgba(128, 0, 32, 0.1);
+    background: transparent;
+}
+
+.gh-filter-main-toggles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.gh-filter-main-btn, .gh-filter-reset-new {
+    padding: 0.8rem 2rem;
+    border: 2px solid #800020;
+    background: transparent;
+    color: #800020;
+    border-radius: 2.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.4rem;
+}
+
+.gh-filter-main-btn:hover, .gh-filter-main-btn.active {
+    background: #800020;
+    color: #fff;
+}
+
+.gh-filter-reset-new {
+    background: transparent;
+    color: #800020;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.gh-filter-reset-new:hover {
+    background: transparent;
+    color: #a04060;
+    text-decoration: none;
+}
+
+.gh-filter-sub-options {
+    background: rgba(128, 0, 32, 0.03);
+    padding: 2rem;
+    border-radius: 1.5rem;
+    margin-top: 1rem;
+    animation: fadeIn 0.3s ease;
+}
+
+.gh-filter-items-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.gh-filter-item-btn {
+    padding: 0.6rem 1.5rem;
+    border: 1px solid rgba(128, 0, 32, 0.2);
+    background: #fff;
+    color: #800020;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1.2rem;
+}
+
+.gh-filter-item-btn:hover {
+    background: rgba(128, 0, 32, 0.05);
+    border-color: #800020;
+}
+
+.gh-filter-item-btn.active {
+    background: #800020;
+    color: #fff;
+    border-color: #800020;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggles = document.querySelectorAll('.gh-filter-main-btn');
+    const optionsBlocks = document.querySelectorAll('.gh-filter-sub-options');
+    const postsContainer = document.querySelector('.gh-postfeed-archive');
+    const allPosts = Array.from(document.querySelectorAll('.gh-postfeed-archive .gh-card'));
+    const resetBtn = document.getElementById('resetFiltersNew');
+
+    // Toggle sub-menus
+    toggles.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = btn.getAttribute('data-toggle');
+            const targetOptions = document.getElementById('options-' + target);
+            const isAlreadyActive = btn.classList.contains('active');
+            
+            toggles.forEach(t => t.classList.remove('active'));
+            optionsBlocks.forEach(o => o.style.display = 'none');
+            
+            if (!isAlreadyActive) {
+                btn.classList.add('active');
+                targetOptions.style.display = 'block';
+            }
+        });
+    });
+
+    // Handle Item Selection
+    const itemBtns = document.querySelectorAll('.gh-filter-item-btn');
+    itemBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const type = btn.getAttribute('data-type');
+            
+            if (type === 'tag') {
+                // Multi-select for tags
+                btn.classList.toggle('active');
+            } else {
+                // Single-select for author and sort
+                document.querySelectorAll(`.gh-filter-item-btn[data-type="${type}"]`).forEach(b => {
+                    if (b !== btn) b.classList.remove('active');
+                });
+                btn.classList.toggle('active');
+            }
+            
+            applyFilters();
+        });
+    });
+
+    // Reset All
+    resetBtn.addEventListener('click', () => {
+        itemBtns.forEach(b => b.classList.remove('active'));
+        document.querySelector('.gh-filter-item-btn[data-slug="date-desc"]').classList.add('active');
+        applyFilters();
+    });
+
+    function applyFilters() {
+        const activeTags = Array.from(document.querySelectorAll('.gh-filter-item-btn[data-type="tag"].active')).map(b => b.getAttribute('data-slug'));
+        const activeAuthors = Array.from(document.querySelectorAll('.gh-filter-item-btn[data-type="author"].active')).map(b => b.getAttribute('data-slug'));
+        const activeSort = document.querySelector('.gh-filter-item-btn[data-type="sort"].active')?.getAttribute('data-slug') || 'date-desc';
+
+        let visibleCount = 0;
+
+        allPosts.forEach(post => {
+            const postClasses = Array.from(post.classList);
+            
+            const matchesTag = activeTags.length === 0 || activeTags.some(tag => postClasses.includes(tag));
+            const matchesAuthor = activeAuthors.length === 0 || activeAuthors.some(author => postClasses.includes(author));
+
+            if (matchesTag && matchesAuthor) {
+                post.style.display = 'block';
+                visibleCount++;
+            } else {
+                post.style.display = 'none';
+            }
+        });
+
+        // Sorting
+        const postsToContainer = allPosts.filter(p => p.style.display !== 'none');
+        postsToContainer.sort((a, b) => {
+            if (activeSort === 'date-desc') {
+                return new Date(b.querySelector('time').getAttribute('datetime')) - new Date(a.querySelector('time').getAttribute('datetime'));
+            } else if (activeSort === 'date-asc') {
+                return new Date(a.querySelector('time').getAttribute('datetime')) - new Date(b.querySelector('time').getAttribute('datetime'));
+            } else if (activeSort === 'title-asc') {
+                return a.querySelector('.gh-card-title').textContent.localeCompare(b.querySelector('.gh-card-title').textContent);
+            }
+            return 0;
+        });
+
+        postsToContainer.forEach(p => postsContainer.appendChild(p));
+
+        // No results message
+        let noResults = document.querySelector('.gh-no-results');
+        if (visibleCount === 0) {
+            if (!noResults) {
+                noResults = document.createElement('div');
+                noResults.className = 'gh-no-results';
+                noResults.innerHTML = '<p>No posts found matching your filters.</p>';
+                noResults.style.textAlign = 'center';
+                noResults.style.padding = '4rem';
+                noResults.style.fontSize = '1.8rem';
+                postsContainer.appendChild(noResults);
+            }
+            noResults.style.display = 'block';
+        } else if (noResults) {
+            noResults.style.display = 'none';
+        }
+    }
+});
+</script>

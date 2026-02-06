@@ -49,32 +49,36 @@ Re-usable card for linking to posts
                 </picture>
             {{/if}}
             <span class="gh-card-meta"><time datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMM YYYY"}}</time> <span class="bull">&bull;</span> {{reading_time}}</span>
-            {{#if authors}}
-                <div class="gh-card-authors">
-                    {{#foreach authors}}
-                        <div class="gh-card-author-item">
-                            {{#if profile_image}}
-                                <img src="{{profile_image}}" alt="{{name}}" class="gh-card-author-avatar">
-                            {{else}}
-                                <div class="gh-card-author-avatar-placeholder">{{#if name}}{{name}}{{/if}}</div>
-                            {{/if}}
-                            <span class="gh-card-author">{{name}}</span>
-                        </div>
-                    {{/foreach}}
-                </div>
-            {{/if}}
+            {{^is "index"}}
+                {{#if authors}}
+                    <div class="gh-card-authors">
+                        {{#foreach authors}}
+                            <div class="gh-card-author-item">
+                                {{#if profile_image}}
+                                    <img src="{{profile_image}}" alt="{{name}}" class="gh-card-author-avatar">
+                                {{else}}
+                                    <div class="gh-card-author-avatar-placeholder">{{#if name}}{{name}}{{/if}}</div>
+                                {{/if}}
+                                <span class="gh-card-author">{{name}}</span>
+                            </div>
+                        {{/foreach}}
+                    </div>
+                {{/if}}
+            {{/is}}
         </div>
         <div class="gh-card-content">
             <h2 class="gh-card-title">{{title}}</h2>
             <p>{{excerpt}}</p>
             
-            {{#if tags}}
-                <div class="gh-card-tags">
-                    {{#foreach tags}}
-                        <span class="gh-card-tag">{{name}}</span>
-                    {{/foreach}}
-                </div>
-            {{/if}}
+            {{^is "index"}}
+                {{#if tags}}
+                    <div class="gh-card-tags">
+                        {{#foreach tags}}
+                            <span class="gh-card-tag">{{name}}</span>
+                        {{/foreach}}
+                    </div>
+                {{/if}}
+            {{/is}}
             
             <strong>Read more</strong>
         </div>

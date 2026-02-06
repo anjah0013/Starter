@@ -30,6 +30,49 @@
             letter-spacing: -0.5px;
             text-align: center;
         }
+
+        /* Scroll to Top Button */
+        .gh-scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #800020;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .gh-scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .gh-scroll-top:hover {
+            background: #a04060;
+            transform: translateY(-5px);
+        }
+
+        .gh-scroll-top svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            transform: rotate(90deg); /* Повертаємо arrow-left вгору */
+        }
+
+        .gh-card-meta {
+            margin-top: 1.5rem !important;
+        }
     </style>
 
 </head>
@@ -145,8 +188,30 @@
 </div>
 
 {{!-- <foot> --}}
-{{ghost_foot}}
-{{!-- Outputs important scripts - should always be included before closing body tag --}}
+    <button id="scroll-to-top" class="gh-scroll-top" aria-label="Scroll to top">
+        {{> "icons/arrow-left"}} {{!-- Використовуємо існуючу іконку, повернемо її через CSS --}}
+    </button>
 
-</body>
-</html>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollBtn = document.getElementById('scroll-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollBtn.classList.add('visible');
+                } else {
+                    scrollBtn.classList.remove('visible');
+                }
+            });
+
+            scrollBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    {{ghost_foot}}
+</body></html>

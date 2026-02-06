@@ -25,10 +25,15 @@
             font-weight: 700;
             color: #800020;
             margin: 0;
-            margin-top: 8vmin;
+            margin-top: 2vmin;
             font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
             letter-spacing: -0.5px;
             text-align: center;
+        }
+
+        .gh-page-head {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
         }
 
         /* Scroll to Top Button */
@@ -72,6 +77,88 @@
 
         .gh-card-meta {
             margin-top: 1.5rem !important;
+        }
+
+        /* Search button positioning */
+        .gh-head-brand .gh-search {
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .gh-head-brand {
+            position: relative;
+        }
+
+        /* Mobile menu positioning */
+        /* Mobile menu height adjustment */
+        .gh-head-open #gh-head {
+            height: auto !important;
+            bottom: auto !important;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            padding-bottom: 40px !important;
+            background: linear-gradient(to bottom, #ffe4ec 0%, #ffdde5 60%, rgba(255, 221, 229, 0) 100%) !important;
+        }
+
+        .gh-head-open #gh-head .gh-head-menu {
+            margin-bottom: 0 !important;
+        }
+
+        .gh-head-open {
+            overflow: auto !important;
+            height: auto !important;
+        }
+
+        .gh-head-open #gh-head .gh-head-menu .gh-nav-link {
+            text-align: left !important;
+            margin-bottom: 15px !important;
+            width: 100%;
+        }
+
+        .gh-head-open #gh-head .gh-head-menu .gh-menu-actions {
+            position: static !important;
+            margin-top: 0 !important;
+            margin-bottom: 20px !important;
+            padding-left: 0 !important;
+            order: -1; /* Move buttons to top */
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .gh-head-open #gh-head .gh-head-menu .gh-menu-actions .gh-button {
+            padding: 0 !important;
+        }
+
+        @media (max-width: 900px) {
+            .gh-head-inner {
+                display: block !important;
+            }
+            .gh-head-logo {
+                display: none !important;
+            }
+            .gh-head-brand {
+                display: flex !important;
+                justify-content: flex-end !important;
+                align-items: center !important;
+            }
+            .gh-head-brand-right {
+                display: flex !important;
+                align-items: center !important;
+            }
+            .gh-head-brand .gh-search {
+                position: static !important;
+                transform: none !important;
+                margin-right: 15px !important;
+            }
+        }
+
+        @media (min-width: 901px) {
+            .gh-head-brand-mobile-btns {
+                display: none !important;
+            }
         }
 
         /* About Page - Three Column Magazine Layout */
@@ -152,37 +239,22 @@
                     {{@site.title}}
                 {{/if}}
             </a>
-            <a class="gh-burger" role="button" aria-label="menu">
-                <div class="gh-burger-box">
-                    <div class="gh-burger-inner"></div>
-                </div>
-            </a>
+            <div class="gh-head-brand-right">
+                {{search}}
+                <a class="gh-burger" role="button" aria-label="menu">
+                    <div class="gh-burger-box">
+                        <div class="gh-burger-inner"></div>
+                    </div>
+                </a>
+            </div>
         </div>
         <div class="gh-head-menu">
             <a href="{{@site.url}}" class="gh-nav-link">Home</a>
             <a href="/about/" class="gh-nav-link">About</a>
             <a href="/archive/" class="gh-nav-link">Posts</a>
-            <div class="gh-menu-actions">
-                {{search}}
-                {{#if @site.members_enabled}}
-                    {{^if @member}}
-                    <a class="gh-button" href="{{@site.signup_url}}">Subscribe</a>
-                    {{else}}
-                    <a class="gh-button" href="#/portal/account">Account</a>
-                    {{/if}}
-                {{/if}}
-            </div>
         </div>
         <div class="gh-head-actions" style="display: none;">
             <div class="gh-head-actions-list">
-                {{search}}
-                {{#if @site.members_enabled}}
-                    {{^if @member}}
-                    <a class="gh-button" href="{{@site.signup_url}}">Subscribe</a>
-                    {{else}}
-                    <a class="gh-button" href="#/portal/account">Account</a>
-                    {{/if}}
-                {{/if}}
             </div>
         </div>
     </nav>

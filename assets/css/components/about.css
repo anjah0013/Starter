@@ -1,0 +1,66 @@
+/* About Page - Three Column Magazine Layout */
+.gh-about-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px 1fr; /* Текст - Фото (350px) - Текст */
+    gap: 50px;
+    align-items: center; /* Центруємо текст вертикально відносно фото */
+    margin: 6vmin auto;
+    padding: 0 4vmin;
+    max-width: 1300px;
+}
+
+.gh-about-column {
+    font-size: 1.8rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.gh-about-photo-wrap {
+    width: 100%;
+    /* Створюємо чіткий вертикальний прямокутник */
+    aspect-ratio: 2 / 3; 
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(128, 0, 32, 0.12);
+    border: 1px solid rgba(128, 0, 32, 0.05);
+}
+
+.gh-about-photo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Прибираємо специфічне вирівнювання для чистого вигляду */
+.gh-about-left, .gh-about-right {
+    text-align: left;
+}
+
+/* Адаптивність для планшетів та телефонів */
+@media (max-width: 1100px) {
+    .gh-about-layout {
+        grid-template-columns: 1fr 300px 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 900px) {
+    .gh-about-layout {
+        grid-template-columns: 1fr; /* На мобільних все в одну колонку */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .gh-about-center {
+        order: -1; /* Фото зверху на мобільних */
+        width: 280px;
+        margin-bottom: 30px;
+    }
+    
+    .gh-about-left, .gh-about-right {
+        text-align: center;
+    }
+}

@@ -32,6 +32,14 @@
             <a href="/archive/" class="gh-more-posts-button">More Posts →</a>
         </div>
 
+        {{#if @site.members_enabled}}
+            {{^if @member}}
+            <div class="gh-subscribe-section" style="text-align: center; margin: 4rem 0;">
+                <a class="gh-button" href="{{@site.signup_url}}" style="background: #800020; color: #fff; padding: 12px 30px; border-radius: 30px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; line-height: 1; height: auto; min-width: 150px; border: none; box-shadow: none;">Subscribe</a>
+            </div>
+            {{/if}}
+        {{/if}}
+
         {{!-- If JS isn't enabled, fallback to standard pagination --}}
         <noscript>
             <div class="gh-pagination">

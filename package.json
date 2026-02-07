@@ -2,7 +2,7 @@
     "name": "ghost-starter-theme",
     "description": "A starter theme for Ghost theme development",
     "demo": "https://starter.ghost.io",
-    "version": "1.0.0",
+    "version": "1.1.2",
     "engines": {
         "ghost": ">=5.0.0"
     },
@@ -59,6 +59,164 @@
         "defaults"
     ],
     "config": {
+        "custom": {
+            "typography": {
+                "type": "select",
+                "options": [
+                    "Serif",
+                    "Sans-serif"
+                ],
+                "default": "Serif"
+            },
+            "body_font_size": {
+                "type": "select",
+                "options": [
+                    "Small",
+                    "Standard",
+                    "Large"
+                ],
+                "default": "Standard"
+            },
+            "header_color": {
+                "type": "color",
+                "default": "#ffe4ec"
+            },
+            "blog_title_position": {
+                "type": "select",
+                "options": [
+                    "Below navigation",
+                    "Inside navigation"
+                ],
+                "default": "Below navigation"
+            },
+            "hero_height": {
+                "type": "select",
+                "options": [
+                    "Full",
+                    "Compact"
+                ],
+                "default": "Full"
+            },
+            "show_hero_excerpt": {
+                "type": "boolean",
+                "default": true
+            },
+            "post_image_size": {
+                "type": "select",
+                "options": [
+                    "Small",
+                    "Standard",
+                    "Large"
+                ],
+                "default": "Standard"
+            },
+            "post_image_aspect_ratio": {
+                "type": "select",
+                "options": [
+                    "1/1",
+                    "4/3",
+                    "3/2",
+                    "16/9"
+                ],
+                "default": "4/3"
+            },
+            "single_post_image_width": {
+                "type": "select",
+                "options": [
+                    "Standard",
+                    "Wide",
+                    "Full",
+                    "Narrow"
+                ],
+                "default": "Standard"
+            },
+            "single_post_image_aspect_ratio": {
+                "type": "select",
+                "options": [
+                    "Original",
+                    "16/9",
+                    "21/9",
+                    "4/3",
+                    "2/1"
+                ],
+                "default": "Original"
+            },
+            "show_post_authors": {
+                "type": "boolean",
+                "default": true
+            },
+            "show_post_tags": {
+                "type": "boolean",
+                "default": true
+            },
+            "show_related_posts": {
+                "type": "boolean",
+                "default": true
+            },
+            "about_image": {
+                "type": "image"
+            },
+            "about_image_size": {
+                "type": "select",
+                "options": [
+                    "Small",
+                    "Standard",
+                    "Large"
+                ],
+                "default": "Standard"
+            },
+            "about_page_text_split": {
+                "type": "select",
+                "options": [
+                    "Mostly left",
+                    "More left",
+                    "Balanced",
+                    "More right",
+                    "Mostly right"
+                ],
+                "default": "Balanced"
+            },
+            "social_twitter": {
+                "type": "text",
+                "default": ""
+            },
+            "social_facebook": {
+                "type": "text",
+                "default": ""
+            },
+            "social_instagram": {
+                "type": "text",
+                "default": ""
+            },
+            "social_youtube": {
+                "type": "text",
+                "default": ""
+            },
+            "social_pinterest": {
+                "type": "text",
+                "default": ""
+            },
+            "social_tiktok": {
+                "type": "text",
+                "default": ""
+            },
+            "social_linkedin": {
+                "type": "text",
+                "default": ""
+            },
+            "social_telegram": {
+                "type": "text",
+                "default": ""
+            },
+            "social_whatsapp": {
+                "type": "text",
+                "default": ""
+            },
+            "social_threads": {
+                "type": "text",
+                "default": ""
+            }
+        },
         "card_assets": true,
         "posts_per_page": 15,
         "image_sizes": {

@@ -13,22 +13,247 @@
     {{!-- Outputs important meta data and settings, should always be in <head> --}}
 
     <style>
-        .gh-postfeed-all {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
-            gap: 4.8vmin 4vmin;
-            padding: 4vmin 0;
+        :root {
+            --gh-accent-color: {{#if @site.accent_color}}{{@site.accent_color}}{{else}}#800020{{/if}};
+            {{#match @custom.typography "Sans-serif"}}
+                --gh-font-heading: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+                --gh-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            {{else}}
+                --gh-font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+                --gh-font-body: Georgia, 'Times New Roman', serif;
+            {{/match}}
+
+            --gh-header-color: {{#if @custom.header_color}}{{@custom.header_color}}{{else}}#ffe4ec{{/if}};
+
+            {{#match @custom.body_font_size "Small"}}
+                --gh-body-font-size: 1.4rem;
+            {{else match @custom.body_font_size "Large"}}
+                --gh-body-font-size: 1.8rem;
+            {{else}}
+                --gh-body-font-size: 1.6rem;
+            {{/match}}
+
+            --gh-post-image-aspect-ratio: {{#if @custom.post_image_aspect_ratio}}{{@custom.post_image_aspect_ratio}}{{else}}4/3{{/if}};
+
+            {{#match @custom.post_image_size "Small"}}
+                --gh-post-image-min-width: 220px;
+                --gh-post-image-max-width: 260px;
+                --gh-post-image-list-width: 200px;
+                --gh-card-padding: 15px;
+                --gh-card-title-size: 1.6rem;
+            {{else match @custom.post_image_size "Large"}}
+                --gh-post-image-min-width: 500px;
+                --gh-post-image-max-width: 100%;
+                --gh-post-image-list-width: 500px;
+                --gh-card-padding: 4vmin;
+                --gh-card-title-size: 2.4rem;
+            {{else}}
+                --gh-post-image-min-width: 300px;
+                --gh-post-image-max-width: 100%;
+                --gh-post-image-list-width: 320px;
+                --gh-card-padding: 3vmin;
+                --gh-card-title-size: 2rem;
+            {{/match}}
+
+            {{#match @custom.about_image_size "Small"}}
+                --gh-about-image-width: 250px;
+            {{else match @custom.about_image_size "Large"}}
+                --gh-about-image-width: 450px;
+            {{else}}
+                --gh-about-image-width: 350px;
+            {{/match}}
+
+            --gh-single-post-image-aspect-ratio: {{#if @custom.single_post_image_aspect_ratio}}{{@custom.single_post_image_aspect_ratio}}{{else}}auto{{/if}};
+            {{#match @custom.single_post_image_aspect_ratio "Original"}}
+                --gh-single-post-image-aspect-ratio: auto;
+            {{/match}}
+
+            {{#match @custom.single_post_image_width "Wide"}}
+                --gh-single-post-image-grid: wide-start / wide-end;
+                --gh-single-post-image-width: 100%;
+            {{else match @custom.single_post_image_width "Full"}}
+                --gh-single-post-image-grid: 1 / -1;
+                --gh-single-post-image-width: 100%;
+            {{else match @custom.single_post_image_width "Narrow"}}
+                --gh-single-post-image-grid: main-start / main-end;
+                --gh-single-post-image-width: 600px;
+            {{else}}
+                --gh-single-post-image-grid: main-start / main-end;
+                --gh-single-post-image-width: 100%;
+            {{/match}}
         }
 
-        .gh-postfeed-archive {
-            padding-left: 20px;
-            padding-right: 20px;
+        .gh-feature-image {
+            grid-column: var(--gh-single-post-image-grid) !important;
+            width: 100% !important;
+            max-width: var(--gh-single-post-image-width) !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        .gh-feature-image img {
+            aspect-ratio: var(--gh-single-post-image-aspect-ratio) !important;
+            object-fit: cover !important;
+            width: 100% !important;
+        }
+
+        /* About Page - Three Column Magazine Layout */
+        .gh-about-layout {
+            display: grid !important;
+            grid-template-columns: 1fr var(--gh-about-image-width) 1fr !important;
+            gap: 50px !important;
+            align-items: center !important;
+            margin: 6vmin auto !important;
+            padding: 0 4vmin !important;
+            max-width: 1300px !important;
+        }
+
+        .gh-about-center {
+            width: var(--gh-about-image-width) !important;
+        }
+
+        /* Home Page & All Posts Grid */
+        .gh-postfeed, .gh-postfeed-all {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fill, minmax(min(var(--gh-post-image-min-width), 100%), 1fr)) !important;
+            gap: 30px !important;
+            padding: 4vmin 20px !important;
+        }
+
+        .gh-card {
+            padding: var(--gh-card-padding) !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+        }
+
+        .gh-card-image, .gh-card-picture {
+            aspect-ratio: var(--gh-post-image-aspect-ratio) !important;
+            object-fit: cover !important;
+            width: 100% !important;
+            max-width: var(--gh-post-image-max-width) !important;
+            margin: 0 auto !important;
+        }
+
+        body {
+            font-family: var(--gh-font-body);
+            font-size: var(--gh-body-font-size);
+        }
+
+        .gh-head {
+            background: var(--gh-header-color) !important;
+        }
+
+        .gh-foot {
+            background: var(--gh-header-color) !important;
+        }
+
+        .gh-hero-content {
+            background: var(--gh-header-color) !important;
+        }
+
+        .gh-hero-image-wrapper::after {
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, var(--gh-header-color) 100%) !important;
+        }
+
+        h1, h2, h3, h4, h5, h6, .gh-page-title, .gh-hero-title, .gh-card-title {
+            font-family: var(--gh-font-heading);
+        }
+
+        {{#match @custom.hero_height "Compact"}}
+        @media (min-width: 901px) {
+            .gh-hero-section, .gh-hero-container {
+                min-height: 400px !important;
+                max-height: 450px !important;
+            }
+        }
+        {{/match}}
+
+        {{#match @custom.blog_title_position "Inside navigation"}}
+        @media (min-width: 901px) {
+            .gh-head-inner {
+                grid-template-columns: auto 1fr auto !important;
+            }
+            .gh-head-brand {
+                display: flex !important;
+                align-items: center !important;
+            }
+            .gh-head-brand-right .gh-burger {
+                display: none !important;
+            }
+            .gh-head-menu {
+                grid-column: 2 / 3 !important;
+            }
+            .gh-head-logo {
+                display: block !important;
+                font-family: var(--gh-font-heading);
+                color: var(--gh-accent-color);
+                margin-right: 40px;
+            }
+        }
+        {{else}}
+        @media (min-width: 901px) {
+            .gh-head-inner {
+                grid-template-columns: 1fr auto !important;
+            }
+            .gh-head-brand {
+                display: flex !important;
+                grid-column: 2 / 3 !important;
+            }
+            .gh-head-logo {
+                display: none !important;
+            }
+            .gh-head-brand-right .gh-burger {
+                display: none !important;
+            }
+            .gh-head-menu {
+                grid-column: 1 / 2 !important;
+                justify-content: center !important;
+            }
+        }
+        {{/match}}
+
+        @media (min-width: 901px) {
+            .gh-head-brand-right {
+                display: flex !important;
+                align-items: center !important;
+            }
+        }
+
+        .gh-post-tags {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .gh-tag {
+            background: rgba(128, 0, 32, 0.1);
+            color: var(--gh-accent-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .gh-related-posts {
+            margin-top: 8vmin;
+            padding-top: 8vmin;
+            border-top: 1px solid rgba(128, 0, 32, 0.1);
+        }
+
+        .gh-related-title {
+            margin-bottom: 4vmin;
+            font-family: var(--gh-font-heading);
+            color: var(--gh-accent-color);
+            text-align: center;
         }
 
         .gh-page-title {
             font-size: 4.8rem;
             font-weight: 700;
-            color: #800020;
+            color: var(--gh-accent-color);
             margin: 0;
             margin-top: 2vmin;
             font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
@@ -48,7 +273,7 @@
             right: 30px;
             width: 50px;
             height: 50px;
-            background: #800020;
+            background: var(--gh-accent-color);
             color: #fff;
             border: none;
             border-radius: 50%;
@@ -249,7 +474,7 @@
                 flex: 0 0 auto !important;
             }
             .gh-hero-image-wrapper::after {
-                background: linear-gradient(to bottom, rgba(255, 228, 236, 0) 0%, #ffdde5 100%) !important;
+                background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, var(--gh-header-color) 100%) !important;
             }
             .gh-hero-content {
                 height: 25vh !important;
@@ -344,33 +569,90 @@
             </div>
             
             <div class="gh-foot-social">
-                <a href="https://twitter.com/" target="_blank" rel="noopener" class="gh-foot-social-link">
+                {{#if @custom.social_twitter}}
+                <a href="{{@custom.social_twitter}}" target="_blank" rel="noopener" class="gh-foot-social-link" title="Twitter">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
                     </svg>
                 </a>
-                <a href="https://facebook.com/" target="_blank" rel="noopener" class="gh-foot-social-link">
+                {{else if @site.twitter}}
+                <a href="{{twitter_url @site.twitter}}" target="_blank" rel="noopener" class="gh-foot-social-link" title="Twitter">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                    </svg>
+                </a>
+                {{/if}}
+                {{#if @custom.social_facebook}}
+                <a href="{{@custom.social_facebook}}" target="_blank" rel="noopener" class="gh-foot-social-link" title="Facebook">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
                     </svg>
                 </a>
-                <a href="https://instagram.com/" target="_blank" rel="noopener" class="gh-foot-social-link">
+                {{else if @site.facebook}}
+                <a href="{{facebook_url @site.facebook}}" target="_blank" rel="noopener" class="gh-foot-social-link" title="Facebook">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                    </svg>
+                </a>
+                {{/if}}
+                {{#if @custom.social_instagram}}
+                <a href="{{@custom.social_instagram}}" target="_blank" rel="noopener" class="gh-foot-social-link" title="Instagram">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
                         <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" fill="none" stroke="currentColor" stroke-width="2"/>
                         <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                 </a>
-                <a href="https://pinterest.com/" target="_blank" rel="noopener" class="gh-foot-social-link">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.477 2 2 6.477 2 12c0 4.237 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.6-.299-1.486c0-1.39.806-2.428 1.81-2.428.852 0 1.264.64 1.264 1.41 0 .858-.546 2.14-.828 3.33-.236.995.5 1.807 1.48 1.807 1.778 0 3.144-1.874 3.144-4.58 0-2.393-1.72-4.068-4.177-4.068-2.845 0-4.515 2.135-4.515 4.34 0 .859.331 1.781.745 2.281a.3.3 0 01.069.288l-.278 1.133c-.044.183-.145.223-.335.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.965-.525-2.291-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z"/>
-                    </svg>
-                </a>
-                <a href="https://youtube.com/" target="_blank" rel="noopener" class="gh-foot-social-link">
+                {{/if}}
+                {{#if @custom.social_youtube}}
+                <a href="{{@custom.social_youtube}}" target="_blank" rel="noopener" class="gh-foot-social-link" title="YouTube">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2c.3-1.79.46-3.7.46-5.58s-.16-3.79-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/>
                     </svg>
                 </a>
+                {{/if}}
+                {{#if @custom.social_pinterest}}
+                <a href="{{@custom.social_pinterest}}" target="_blank" rel="noopener" class="gh-foot-social-link" title="Pinterest">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.477 2 2 6.477 2 12c0 4.237 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.6-.299-1.486c0-1.39.806-2.428 1.81-2.428.852 0 1.264.64 1.264 1.41 0 .858-.546 2.14-.828 3.33-.236.995.5 1.807 1.48 1.807 1.778 0 3.144-1.874 3.144-4.58 0-2.393-1.72-4.068-4.177-4.068-2.845 0-4.515 2.135-4.515 4.34 0 .859.331 1.781.745 2.281a.3.3 0 01.069.288l-.278 1.133c-.044.183-.145.223-.335.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.965-.525-2.291-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z"/>
+                    </svg>
+                </a>
+                {{/if}}
+                {{#if @custom.social_tiktok}}
+                <a href="{{@custom.social_tiktok}}" target="_blank" rel="noopener" class="gh-foot-social-link" title="TikTok">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12.525.02c1.31 0 2.591.21 3.793.602V4.62c-.742-.25-1.53-.382-2.343-.382-2.12 0-3.84 1.72-3.84 3.84v3.84h6.182c-.25 1.1-.742 2.11-1.432 2.962-.852 1.05-2.03 1.84-3.372 2.22-.44.13-.9.19-1.37.19-2.65 0-4.8-2.15-4.8-4.8s2.15-4.8 4.8-4.8c.47 0 .93.06 1.37.19V3.82c-.44-.13-.9-.19-1.37-.19-4.86 0-8.8 3.94-8.8 8.8s3.94 8.8 8.8 8.8 8.8-3.94 8.8-8.8V0h-6.182z"/>
+                    </svg>
+                </a>
+                {{/if}}
+                {{#if @custom.social_linkedin}}
+                <a href="{{@custom.social_linkedin}}" target="_blank" rel="noopener" class="gh-foot-social-link" title="LinkedIn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+                {{/if}}
+                {{#if @custom.social_telegram}}
+                <a href="{{@custom.social_telegram}}" target="_blank" rel="noopener" class="gh-foot-social-link" title="Telegram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.891 8.146l-1.92 9.044c-.145.639-.519.796-1.055.496l-2.922-2.154-1.41 1.358c-.156.156-.287.287-.588.287l.209-2.971 5.407-4.884c.235-.21-.051-.326-.366-.117l-6.685 4.208-2.88-.9c-.626-.196-.638-.626.13-.923l11.25-4.335c.521-.19.977.126.83.821z"/>
+                    </svg>
+                </a>
+                {{/if}}
+                {{#if @custom.social_whatsapp}}
+                <a href="{{@custom.social_whatsapp}}" target="_blank" rel="noopener" class="gh-foot-social-link" title="WhatsApp">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.301-.15-1.779-.879-2.053-.979-.275-.1-.475-.15-.675.15-.199.299-.775.979-.95 1.174-.175.195-.349.219-.65.07-.301-.15-1.27-.468-2.42-1.594-.894-.797-1.497-1.783-1.673-2.083-.176-.3-.018-.462.13-.61.134-.133.301-.35.451-.524.151-.174.201-.299.301-.498.1-.2.05-.375-.025-.524-.075-.15-.675-1.625-.925-2.224-.244-.599-.513-.517-.699-.517-.181-.001-.387-.001-.594-.001-.206 0-.543.078-.827.442-.283.365-1.084 1.06-1.084 2.584s1.109 3.003 1.259 3.203c.15.2 2.182 3.33 5.288 4.67.738.318 1.315.509 1.765.652.742.237 1.417.203 1.95.123.594-.088 1.779-.726 2.028-1.43.25-.703.25-1.306.175-1.43-.075-.124-.275-.199-.576-.349z"/>
+                    </svg>
+                </a>
+                {{/if}}
+                {{#if @custom.social_threads}}
+                <a href="{{@custom.social_threads}}" target="_blank" rel="noopener" class="gh-foot-social-link" title="Threads">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.862 15.124c-.696 1.518-2.016 2.544-3.648 2.82-1.632.276-3.264-.132-4.44-1.116-.576-.48-.912-1.14-.912-1.86 0-.72.336-1.38.912-1.86 1.176-.984 2.808-1.392 4.44-1.116 1.632.276 2.952 1.302 3.648 2.82.12.264.12.564 0 .828-.12.264-.348.456-.636.528-.288.072-.588 0-.828-.192-.24-.192-.384-.48-.384-.792 0-.312.144-.6.384-.792.24-.192.54-.264.828-.192.288.072.516.264.636.528.12.264.12.564 0 .828-.696 1.518-2.016 2.544-3.648 2.82-1.632.276-3.264-.132-4.44-1.116-.576-.48-.912-1.14-.912-1.86 0-.72.336-1.38.912-1.86 1.176-.984 2.808-1.392 4.44-1.116 1.632.276 2.952 1.302 3.648 2.82.12.264.12.564 0 .828s-.348.456-.636.528c-.288.072-.588 0-.828-.192-.24-.192-.384-.48-.384-.792 0-.312.144-.6.384-.792.24-.192.54-.264.828-.192.288.072.516.264.636.528z"/>
+                    </svg>
+                </a>
+                {{/if}}
             </div>
         </div>
         

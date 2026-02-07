@@ -7,12 +7,14 @@
     </header>
 
     {{#has slug="about"}}
-    <div class="gh-about-layout gh-container" id="about-container">
+    <div class="gh-about-layout gh-container" id="about-container" data-split="{{@custom.about_page_text_split}}">
         <div class="gh-about-column" id="left-side"></div>
         
         <div class="gh-about-column gh-about-center">
             <div class="gh-about-photo-wrap">
-                {{#if feature_image}}
+                {{#if @custom.about_image}}
+                    <img src="{{@custom.about_image}}" alt="{{title}}" class="gh-about-photo-img" />
+                {{else if feature_image}}
                     <img src="{{feature_image}}" alt="{{title}}" class="gh-about-photo-img" />
                 {{else}}
                     <div style="background: #eee; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">PHOTO</div>
@@ -31,25 +33,34 @@
     <script>
     (function() {
         function balanceContent() {
+            const container = document.getElementById('about-container');
             const hidden = document.getElementById('hidden-content');
             const left = document.getElementById('left-side');
             const right = document.getElementById('right-side');
             
-            if (!hidden || !left || !right) return;
+            if (!hidden || !left || !right || !container) return;
 
             const elements = Array.from(hidden.children);
             if (elements.length === 0) return;
+
+            // Визначаємо коефіцієнт розподілу на основі налаштувань
+            const splitSetting = container.dataset.split || 'Balanced';
+            let splitRatio = 0.5;
+            
+            if (splitSetting === 'Mostly left') splitRatio = 0.8;
+            else if (splitSetting === 'More left') splitRatio = 0.65;
+            else if (splitSetting === 'More right') splitRatio = 0.35;
+            else if (splitSetting === 'Mostly right') splitRatio = 0.2;
 
             // Рахуємо загальну кількість "ваги" (кількість літер)
             const totalWeight = hidden.innerText.length;
             let currentWeight = 0;
             let splitIndex = 0;
 
-            // Шукаємо індекс елемента, який є найближчим до середини
+            // Шукаємо індекс елемента для розриву
             for (let i = 0; i < elements.length; i++) {
                 currentWeight += elements[i].innerText.length;
-                if (currentWeight >= totalWeight / 2) {
-                    // Вибираємо цей або наступний елемент для розриву для кращого балансу
+                if (currentWeight >= totalWeight * splitRatio) {
                     splitIndex = i;
                     break;
                 }

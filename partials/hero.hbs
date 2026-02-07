@@ -15,7 +15,9 @@
             <div class="gh-hero-content">
                 <div class="gh-hero-text">
                     <h2 class="gh-hero-title">{{title}}</h2>
+                    {{#if @custom.show_hero_excerpt}}
                     <p class="gh-hero-excerpt">{{excerpt words="30"}}</p>
+                    {{/if}}
                     <a href="{{url}}" class="gh-hero-button">Read More</a>
                 </div>
             </div>

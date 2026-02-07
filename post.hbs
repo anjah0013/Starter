@@ -63,9 +63,19 @@
 
     <footer class="gh-footer gh-canvas">
 
+        {{#if @custom.show_post_tags}}
+        {{#if tags}}
+            <div class="gh-post-tags">
+                {{#foreach tags}}<a href="{{url}}" class="gh-tag">{{name}}</a>{{/foreach}}
+            </div>
+        {{/if}}
+        {{/if}}
+
+        {{#if @custom.show_post_authors}}
         <div class="gh-post-authors">
             Written by {{#foreach authors}}<a href="{{url}}">{{name}}</a>{{/foreach}}
         </div>
+        {{/if}}
 
         {{#if comments}}
         <section class="gh-post-comments">
@@ -76,6 +86,21 @@
     </footer>
 
 </article>
+
+{{#if @custom.show_related_posts}}
+    {{#get "posts" limit="3" filter="tags:{{primary_tag.slug}}+id:-{{id}}" include="tags,authors" as |related_posts|}}
+        {{#if related_posts}}
+            <section class="gh-related-posts gh-canvas">
+                <h3 class="gh-related-title">You might also like</h3>
+                <div class="gh-postfeed">
+                    {{#foreach related_posts}}
+                        {{> "card"}}
+                    {{/foreach}}
+                </div>
+            </section>
+        {{/if}}
+    {{/get}}
+{{/if}}
 
 <aside class="gh-readmore">
     <div class="gh-readmore-inner gh-container">

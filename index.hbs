@@ -25,9 +25,11 @@
         </div>
 
         <div id="posts" class="gh-postfeed">
-        {{#foreach posts limit="6"}}
-            {{> "card" page=../pagination.page }} {{!-- partials/card.hbs --}}
-        {{/foreach}}
+        {{#get "posts" limit="6" include="authors,tags"}}
+            {{#foreach posts}}
+                {{> "card"}}
+            {{/foreach}}
+        {{/get}}
         </div>
 
         <div class="gh-more-posts-container">

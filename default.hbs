@@ -120,6 +120,16 @@
             padding: 4vmin 20px !important;
         }
 
+        /* Initial state: only 3 posts */
+        .gh-postfeed .gh-card:nth-child(n+4) {
+            display: none !important;
+        }
+
+        /* Expanded state: show up to 6 posts */
+        .gh-postfeed.gh-postfeed-expanded .gh-card:nth-child(n+4) {
+            display: flex !important;
+        }
+
         .gh-card {
             padding: var(--gh-card-padding) !important;
             display: flex !important;
@@ -250,6 +260,15 @@
             text-align: center;
         }
 
+        .gh-card-meta, .gh-post-meta {
+            font-family: 'Playfair Display', Georgia, serif !important;
+            font-weight: 300 !important;
+            text-transform: none !important;
+            letter-spacing: 0.02em !important;
+            font-style: italic !important;
+            opacity: 0.7 !important;
+        }
+
         .gh-page-title {
             font-size: 4.8rem;
             font-weight: 700;
@@ -377,12 +396,12 @@
             .gh-head-brand-right {
                 display: flex !important;
                 align-items: center !important;
-                margin-right: 15px !important;
+                margin-right: 0 !important;
             }
             .gh-head-brand .gh-search {
                 position: static !important;
                 transform: none !important;
-                margin-right: 15px !important;
+                margin-right: 10px !important;
             }
         }
 

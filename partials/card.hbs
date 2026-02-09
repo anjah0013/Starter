@@ -2,7 +2,7 @@
 Re-usable card for linking to posts
 --}}
 
-<article class="gh-card {{post_class}} {{#foreach authors}}author-{{slug}} {{/foreach}}">
+<article class="gh-card {{post_class}} {{#foreach authors}}author-{{slug}} {{/foreach}}" data-tags="{{#foreach tags}}tag-{{slug}} {{/foreach}}" data-authors="{{#foreach authors}}author-{{slug}} {{/foreach}}">
     <a class="gh-card-link" href="{{url}}">
         <div class="gh-card-header">
             {{#if feature_image}}

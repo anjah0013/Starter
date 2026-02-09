@@ -137,6 +137,10 @@
             align-items: center !important;
         }
 
+        .gh-card-hidden {
+            display: none !important;
+        }
+
         .gh-card-image, .gh-card-picture {
             aspect-ratio: var(--gh-post-image-aspect-ratio) !important;
             object-fit: cover !important;
@@ -182,51 +186,60 @@
         {{#match @custom.blog_title_position "Inside navigation"}}
         @media (min-width: 901px) {
             .gh-head-inner {
-                grid-template-columns: auto 1fr auto !important;
+                grid-template-columns: 1fr auto 1fr !important;
+                display: grid !important;
             }
             .gh-head-brand {
                 display: flex !important;
                 align-items: center !important;
-            }
-            .gh-head-brand-right .gh-burger {
-                display: none !important;
+                grid-column: 1 / 2 !important;
             }
             .gh-head-menu {
                 grid-column: 2 / 3 !important;
+                justify-self: center !important;
+            }
+            .gh-head-brand-right {
+                display: flex !important;
+                align-items: center !important;
+                justify-self: end !important;
+                grid-column: 3 / 4 !important;
             }
             .gh-head-logo {
                 display: block !important;
                 font-family: var(--gh-font-heading);
                 color: var(--gh-accent-color);
-                margin-right: 40px;
+                margin: 0 0 0 20px !important;
             }
         }
         {{else}}
         @media (min-width: 901px) {
             .gh-head-inner {
-                grid-template-columns: 1fr auto !important;
+                grid-template-columns: 1fr auto 1fr !important;
+                display: grid !important;
             }
             .gh-head-brand {
                 display: flex !important;
-                grid-column: 2 / 3 !important;
+                grid-column: 1 / 2 !important;
             }
             .gh-head-logo {
                 display: none !important;
             }
-            .gh-head-brand-right .gh-burger {
-                display: none !important;
-            }
             .gh-head-menu {
-                grid-column: 1 / 2 !important;
-                justify-content: center !important;
+                grid-column: 2 / 3 !important;
+                justify-self: center !important;
+            }
+            .gh-head-brand-right {
+                display: flex !important;
+                align-items: center !important;
+                justify-self: end !important;
+                grid-column: 3 / 4 !important;
             }
         }
         {{/match}}
 
         @media (min-width: 901px) {
-            .gh-head-brand-right {
-                display: flex !important;
-                align-items: center !important;
+            .gh-head-brand-right .gh-burger {
+                display: none !important;
             }
         }
 
@@ -344,19 +357,32 @@
         /* Mobile menu positioning */
         /* Mobile menu height adjustment */
         .gh-head-open #gh-head {
-            height: auto !important;
-            bottom: auto !important;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            padding-bottom: 40px !important;
-            background: linear-gradient(to bottom, #ffe4ec 0%, #ffdde5 60%, rgba(255, 221, 229, 0) 100%) !important;
+            position: relative !important;
+            z-index: 1000 !important;
+            overflow: visible !important;
         }
 
         .gh-head-open #gh-head .gh-head-menu {
-            margin-bottom: 0 !important;
+            display: flex !important;
+            position: absolute !important;
+            top: 100% !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            background: linear-gradient(to bottom, var(--gh-header-color) 0%, #ffdde5 60%, rgba(255, 221, 229, 0) 100%) !important;
+            padding: 20px !important;
+            padding-bottom: 40px !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            justify-content: flex-start !important;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            z-index: 9999 !important;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
 
         .gh-head-open {
-            overflow: auto !important;
+            overflow: visible !important;
             height: auto !important;
         }
 
@@ -381,18 +407,53 @@
             padding: 0 !important;
         }
 
+        .gh-head-home-icon {
+            display: none;
+            color: var(--gh-accent-color);
+        }
+
         @media (max-width: 900px) {
             .gh-head-inner {
                 display: block !important;
             }
+
+            .gh-head-home-icon {
+                display: flex !important;
+                align-items: center;
+            }
+            
+            {{#match @custom.blog_title_position "Inside navigation"}}
+            .gh-head-logo {
+                display: block !important;
+                font-family: var(--gh-font-heading);
+                color: var(--gh-accent-color);
+                font-size: 1.8rem;
+                position: absolute !important;
+                left: 50% !important;
+                top: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                margin: 0 !important;
+                white-space: nowrap !important;
+                z-index: 1 !important;
+            }
+            .gh-head-brand {
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                position: relative !important;
+                min-height: 44px !important;
+            }
+            {{else}}
             .gh-head-logo {
                 display: none !important;
             }
             .gh-head-brand {
                 display: flex !important;
-                justify-content: flex-end !important;
+                justify-content: space-between !important;
                 align-items: center !important;
             }
+            {{/match}}
+
             .gh-head-brand-right {
                 display: flex !important;
                 align-items: center !important;
@@ -539,6 +600,9 @@
     <nav class="gh-head-inner gh-container">
 
         <div class="gh-head-brand">
+            <a class="gh-head-home-icon" href="{{@site.url}}" aria-label="Home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </a>
             <a class="gh-head-logo" href="{{@site.url}}">
                 {{#if @site.logo}}
                     <img src="{{@site.logo}}" alt="{{@site.title}}" />
@@ -546,19 +610,19 @@
                     {{@site.title}}
                 {{/if}}
             </a>
-            <div class="gh-head-brand-right">
-                {{search}}
-                <a class="gh-burger" role="button" aria-label="menu">
-                    <div class="gh-burger-box">
-                        <div class="gh-burger-inner"></div>
-                    </div>
-                </a>
-            </div>
         </div>
         <div class="gh-head-menu">
             <a href="{{@site.url}}" class="gh-nav-link">Home</a>
             <a href="/about/" class="gh-nav-link">About</a>
             <a href="/archive/" class="gh-nav-link">Posts</a>
+        </div>
+        <div class="gh-head-brand-right">
+            {{search}}
+            <a class="gh-burger" role="button" aria-label="menu">
+                <div class="gh-burger-box">
+                    <div class="gh-burger-inner"></div>
+                </div>
+            </a>
         </div>
         <div class="gh-head-actions" style="display: none;">
             <div class="gh-head-actions-list">

@@ -189,16 +189,25 @@ document.addEventListener('DOMContentLoaded', function() {
         let visibleCount = 0;
 
         allPosts.forEach(post => {
-            const postClasses = Array.from(post.classList);
+            const postTagsString = post.getAttribute('data-tags') || '';
+            const postAuthorsString = post.getAttribute('data-authors') || '';
             
-            const matchesTag = activeTags.length === 0 || activeTags.some(tag => postClasses.includes(tag));
-            const matchesAuthor = activeAuthors.length === 0 || activeAuthors.some(author => postClasses.includes(author));
+            // Helper to check for exact word in space-separated string
+            const hasExactMatch = (haystack, needle) => {
+                return haystack.split(' ').filter(item => item === needle).length > 0;
+            };
+
+            // For tags: OR logic (matches ANY selected tag)
+            const matchesTag = activeTags.length === 0 || activeTags.some(tag => hasExactMatch(postTagsString, tag));
+            
+            // For authors: OR logic (matches ANY selected author)
+            const matchesAuthor = activeAuthors.length === 0 || activeAuthors.some(author => hasExactMatch(postAuthorsString, author));
 
             if (matchesTag && matchesAuthor) {
-                post.style.display = 'block';
+                post.classList.remove('gh-card-hidden');
                 visibleCount++;
             } else {
-                post.style.display = 'none';
+                post.classList.add('gh-card-hidden');
             }
         });
 

@@ -8,7 +8,6 @@ import menuOpen from "./menuOpen";
 import infiniteScroll from "./infiniteScroll";
 import heroSlider from "./heroSlider";
 import "./morePosts";
-import "./filters";
 
 // Call the menu and infinite scroll functions
 menuOpen();

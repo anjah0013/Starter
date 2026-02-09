@@ -423,12 +423,24 @@
 
         @media (max-width: 900px) {
             .gh-head-inner {
-                display: block !important;
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                height: 60px !important;
             }
 
-            .gh-head-home-icon {
+            .gh-head-brand {
                 display: flex !important;
-                align-items: center;
+                align-items: center !important;
+                position: relative !important;
+                flex: 1 !important;
+            }
+
+            .gh-head-brand-right {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: flex-end !important;
+                flex: 1 !important;
             }
             
             {{#match @custom.blog_title_position "Inside navigation"}}
@@ -445,32 +457,18 @@
                 white-space: nowrap !important;
                 z-index: 1 !important;
             }
-            .gh-head-brand {
-                display: flex !important;
-                justify-content: space-between !important;
-                align-items: center !important;
-                position: relative !important;
-                min-height: 44px !important;
-            }
             {{else}}
             .gh-head-logo {
                 display: none !important;
             }
-            .gh-head-brand {
-                display: flex !important;
-                justify-content: space-between !important;
-                align-items: center !important;
-            }
             {{/match}}
 
-            .gh-head-brand-right {
+            .gh-head-home-icon {
                 display: flex !important;
                 align-items: center !important;
-                margin-right: 0 !important;
             }
+
             .gh-head-brand .gh-search {
-                position: static !important;
-                transform: none !important;
                 margin-right: 10px !important;
             }
         }

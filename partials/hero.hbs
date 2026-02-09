@@ -1,7 +1,7 @@
 {{!-- Hero Section - Featured Posts Slider --}}
 {{#get "posts" filter="featured:true" limit="5" as |featured_posts|}}
 {{#if featured_posts}}
-<section class="gh-hero-section">
+<section class="gh-hero-section" data-speed="{{@custom.hero_slideshow_speed}}">
     <div class="gh-hero-container">
         {{#foreach featured_posts}}
         <div class="gh-hero-slide" data-index="{{@index}}">

@@ -767,6 +767,7 @@
 </div>
 
 {{!-- <foot> --}}
+    {{#if @custom.show_scroll_top}}
     <button id="scroll-to-top" class="gh-scroll-top" aria-label="Scroll to top">
         {{> "icons/arrow-left"}} {{!-- Використовуємо існуючу іконку, повернемо її через CSS --}}
     </button>
@@ -791,6 +792,7 @@
             });
         });
     </script>
+    {{/if}}
 
     {{ghost_foot}}
 </body></html>

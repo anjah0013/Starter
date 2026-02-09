@@ -12,7 +12,17 @@ export default function heroSlider() {
 
     let currentSlide = 0;
     let slideInterval;
-    const autoPlayDelay = 5000; // 5 seconds between slides
+    
+    // Get speed from data attribute
+    const speedAttr = heroSection.getAttribute('data-speed') || '5s';
+    let autoPlayDelay = 5000;
+    let autoPlayEnabled = true;
+
+    if (speedAttr === 'Off') {
+        autoPlayEnabled = false;
+    } else {
+        autoPlayDelay = parseInt(speedAttr) * 1000;
+    }
 
     // Initialize first slide
     function init() {
@@ -29,7 +39,9 @@ export default function heroSlider() {
         if (dots.length > 0) {
             dots[0].classList.add('active');
         }
-        startAutoPlay();
+        if (autoPlayEnabled) {
+            startAutoPlay();
+        }
     }
 
     // Show specific slide with stacking animation
@@ -102,6 +114,7 @@ export default function heroSlider() {
 
     // Start autoplay
     function startAutoPlay() {
+        if (!autoPlayEnabled) return;
         stopAutoPlay();
         slideInterval = setInterval(nextSlide, autoPlayDelay);
     }

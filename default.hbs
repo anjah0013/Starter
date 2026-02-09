@@ -100,7 +100,7 @@
         /* About Page - Three Column Magazine Layout */
         .gh-about-layout {
             display: grid !important;
-            grid-template-columns: 1fr var(--gh-about-image-width) 1fr !important;
+            grid-template-columns: 1fr var(--gh-about-image-width, 350px) 1fr !important;
             gap: 50px !important;
             align-items: center !important;
             margin: 6vmin auto !important;
@@ -109,7 +109,7 @@
         }
 
         .gh-about-center {
-            width: var(--gh-about-image-width) !important;
+            width: var(--gh-about-image-width, 350px) !important;
         }
 
         /* Home Page & All Posts Grid */
@@ -139,6 +139,12 @@
 
         .gh-card-hidden {
             display: none !important;
+        }
+
+        .gh-button:hover {
+            box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.2) !important;
+            color: #1a1a1a !important;
+            transition: all 0.3s ease !important;
         }
 
         .gh-card-image, .gh-card-picture {
@@ -472,17 +478,6 @@
             }
         }
 
-        /* About Page - Three Column Magazine Layout */
-        .gh-about-layout {
-            display: grid;
-            grid-template-columns: 1fr 350px 1fr;
-            gap: 50px;
-            align-items: center;
-            margin: 6vmin auto;
-            padding: 0 4vmin;
-            max-width: 1300px;
-        }
-
         .gh-about-column {
             font-size: 1.8rem;
             line-height: 1.6;
@@ -519,19 +514,25 @@
 
         @media (max-width: 900px) {
             .gh-about-layout {
-                grid-template-columns: 1fr;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                text-align: left !important;
+                padding: 0 25px !important;
+            }
+            .gh-about-column {
+                padding: 0 !important;
+                width: 100% !important;
+                text-align: left !important;
             }
             .gh-about-center {
-                order: -1;
-                width: 280px;
-                margin-bottom: 30px;
+                width: 100% !important;
+                max-width: var(--gh-about-image-width, 350px) !important;
+                margin: 30px auto !important;
+                align-self: center !important;
             }
             .gh-about-left, .gh-about-right {
-                text-align: center;
+                text-align: left !important;
             }
         }
 
@@ -658,21 +659,9 @@
                         <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
                     </svg>
                 </a>
-                {{else if @site.twitter}}
-                <a href="{{twitter_url @site.twitter}}" target="_blank" rel="noopener" class="gh-foot-social-link" title="Twitter">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
-                    </svg>
-                </a>
                 {{/if}}
                 {{#if @custom.social_facebook}}
                 <a href="{{@custom.social_facebook}}" target="_blank" rel="noopener" class="gh-foot-social-link" title="Facebook">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
-                    </svg>
-                </a>
-                {{else if @site.facebook}}
-                <a href="{{facebook_url @site.facebook}}" target="_blank" rel="noopener" class="gh-foot-social-link" title="Facebook">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
                     </svg>

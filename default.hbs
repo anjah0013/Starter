@@ -24,6 +24,8 @@
             {{/match}}
 
             --gh-header-color: {{#if @custom.header_color}}{{@custom.header_color}}{{else}}#ffe4ec{{/if}};
+            --gh-bg-color-start: {{#if @custom.background_color_start}}{{@custom.background_color_start}}{{else}}#fffef9{{/if}};
+            --gh-bg-color-end: {{#if @custom.background_color_end}}{{@custom.background_color_end}}{{else}}#fff5dc{{/if}};
 
             {{#match @custom.body_font_size "Small"}}
                 --gh-body-font-size: 1.4rem;
@@ -158,6 +160,7 @@
         body {
             font-family: var(--gh-font-body);
             font-size: var(--gh-body-font-size);
+            background: linear-gradient(135deg, var(--gh-bg-color-start) 0%, var(--gh-bg-color-end) 100%) !important;
         }
 
         .gh-head {

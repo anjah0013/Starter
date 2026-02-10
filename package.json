@@ -1,6 +1,6 @@
 {
-    "name": "ghost-starter-theme",
-    "description": "A starter theme for Ghost theme development",
+    "name": "pink-ghost-theme",
+    "description": "A modern, customizable Ghost theme with elegant typography, gradient backgrounds, hero slideshow, and extensive customization options for colors, layouts, and social media integration.",
     "demo": "https://starter.ghost.io",
     "version": "1.1.7",
     "engines": {
@@ -8,7 +8,7 @@
     },
     "license": "MIT",
     "screenshots": {
-        "desktop": "assets/screenshot-desktop.jpg"
+        "desktop": "assets/screenshot-desktop.png"
     },
     "scripts": {
         "dev": "rollup -c --environment BUILD:development -w",
@@ -18,7 +18,7 @@
         "pretest": "npm run build"
     },
     "author": {
-        "name": "Ghost Foundation",
+        "name": "Anna Khramenkova",
         "email": "hello@ghost.org",
         "url": "https://ghost.org"
     },
@@ -26,13 +26,24 @@
         "type": "theme",
         "categories": [
             "Minimal",
-            "Magazine"
+            "Magazine",
+            "Personal",
+            "Blog"
         ]
     },
     "keywords": [
         "ghost",
         "theme",
-        "ghost-theme"
+        "ghost-theme",
+        "minimal",
+        "magazine",
+        "modern",
+        "elegant",
+        "customizable",
+        "responsive",
+        "pink",
+        "gradient",
+        "blog"
     ],
     "repository": {
         "type": "git",

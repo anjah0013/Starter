@@ -22,3 +22,11 @@ projectFilesBackup
 .DS_Store
 
 dist/
+
+.github/
+.vscode/
+.windsurf/
+llms-full.txt
+package-lock.json
+README.md
+GEMINI.md

@@ -1,4 +1,6 @@
 routes:
+  hello/:
+    template: page-archive
 
 collections:
   /:

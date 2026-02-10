@@ -2,7 +2,7 @@
     "name": "ghost-starter-theme",
     "description": "A starter theme for Ghost theme development",
     "demo": "https://starter.ghost.io",
-    "version": "1.1.5",
+    "version": "1.1.7",
     "engines": {
         "ghost": ">=5.0.0"
     },
@@ -175,29 +175,6 @@
             "show_related_posts": {
                 "type": "boolean",
                 "default": true
-            },
-            "about_image": {
-                "type": "image"
-            },
-            "about_image_size": {
-                "type": "select",
-                "options": [
-                    "Small",
-                    "Standard",
-                    "Large"
-                ],
-                "default": "Standard"
-            },
-            "about_page_text_split": {
-                "type": "select",
-                "options": [
-                    "Mostly left",
-                    "More left",
-                    "Balanced",
-                    "More right",
-                    "Mostly right"
-                ],
-                "default": "Balanced"
             },
             "social_twitter": {
                 "type": "text",

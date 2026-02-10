@@ -57,13 +57,7 @@
                 --gh-card-title-size: 2rem;
             {{/match}}
 
-            {{#match @custom.about_image_size "Small"}}
-                --gh-about-image-width: 250px;
-            {{else match @custom.about_image_size "Large"}}
-                --gh-about-image-width: 450px;
-            {{else}}
-                --gh-about-image-width: 350px;
-            {{/match}}
+            --gh-about-image-width: 350px;
 
             --gh-single-post-image-aspect-ratio: {{#if @custom.single_post_image_aspect_ratio}}{{@custom.single_post_image_aspect_ratio}}{{else}}auto{{/if}};
             {{#match @custom.single_post_image_aspect_ratio "Original"}}
@@ -530,10 +524,10 @@
                 flex-direction: column !important;
                 align-items: flex-start !important;
                 text-align: left !important;
-                padding: 0 25px !important;
+                padding: 0 !important;
             }
             .gh-about-column {
-                padding: 0 !important;
+                padding: 0 60px !important;
                 width: 100% !important;
                 text-align: left !important;
             }

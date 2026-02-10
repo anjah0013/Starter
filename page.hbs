@@ -8,20 +8,15 @@
 
     {{#has slug="about, про-мене, bio, information"}}
     {{#if feature_image}}
-        {{!-- Якщо є картинка (в налаштуваннях теми або Feature Image сторінки), вмикаємо макет --}}
-        <div class="gh-about-layout gh-container" id="about-container" data-split="{{@custom.about_page_text_split}}">
+        {{!-- Якщо є картинка, вмикаємо макет --}}
+        <div class="gh-about-layout gh-container" id="about-container">
             <div class="gh-about-column" id="left-side"></div>
             
             <div class="gh-about-column gh-about-center">
                 <div class="gh-about-photo-wrap">
-                    {{#if @custom.about_image}}
-                        <img src="{{@custom.about_image}}" alt="{{title}}" class="gh-about-photo-img" />
-                    {{else}}
-                        <img src="{{feature_image}}" alt="{{title}}" class="gh-about-photo-img" />
-                    {{/if}}
+                    <img src="{{feature_image}}" alt="{{title}}" class="gh-about-photo-img" />
                 </div>
             </div>
-
             <div class="gh-about-column" id="right-side"></div>
         </div>
 
@@ -46,13 +41,8 @@
                     return;
                 }
 
-                const splitSetting = container.dataset.split || 'Balanced';
-                let splitRatio = 0.5;
-                if (splitSetting === 'Mostly left') splitRatio = 0.8;
-                else if (splitSetting === 'More left') splitRatio = 0.65;
-                else if (splitSetting === 'More right') splitRatio = 0.35;
-                else if (splitSetting === 'Mostly right') splitRatio = 0.2;
-
+                // Використовуємо постійний збалансований розподіл (0.5)
+                const splitRatio = 0.5;
                 const totalWeight = hidden.innerText.length;
                 let currentWeight = 0;
                 let splitIndex = 0;

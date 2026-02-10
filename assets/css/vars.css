@@ -12,8 +12,12 @@
     --color-error: #f05230;
 
     /* Fonts */
-    --font-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    --font-serif: Georgia, Times, serif;
+    --gh-font-heading: 'Playfair Display', Georgia, serif;
+    --gh-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --gh-body-font-size: 1.6rem;
+
+    --font-sans-serif: var(--gh-font-body);
+    --font-serif: var(--gh-font-heading);
     --font-mono: Menlo, Courier, monospace;
     --font-light: 100;
     --font-normal: 400;

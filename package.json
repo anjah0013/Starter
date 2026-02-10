@@ -13,7 +13,7 @@
     "scripts": {
         "dev": "rollup -c --environment BUILD:development -w",
         "build": "rollup -c --environment BUILD:production",
-        "zip": "npm run build && bestzip $npm_package_name.zip assets/* partials/* members/* *.hbs package.json",
+        "zip": "npm run build && bestzip pink-ghost-theme.zip assets/* partials/* members/* *.hbs package.json",
         "test": "npx gscan .",
         "pretest": "npm run build"
     },
@@ -71,23 +71,6 @@
     ],
     "config": {
         "custom": {
-            "typography": {
-                "type": "select",
-                "options": [
-                    "Serif",
-                    "Sans-serif"
-                ],
-                "default": "Serif"
-            },
-            "body_font_size": {
-                "type": "select",
-                "options": [
-                    "Small",
-                    "Standard",
-                    "Large"
-                ],
-                "default": "Standard"
-            },
             "background_color_start": {
                 "type": "color",
                 "default": "#fffef9"
@@ -111,14 +94,6 @@
                     "Inside navigation"
                 ],
                 "default": "Below navigation"
-            },
-            "hero_height": {
-                "type": "select",
-                "options": [
-                    "Full",
-                    "Compact"
-                ],
-                "default": "Full"
             },
             "show_hero_excerpt": {
                 "type": "boolean",

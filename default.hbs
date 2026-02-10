@@ -15,25 +15,12 @@
     <style>
         :root {
             --gh-accent-color: {{#if @site.accent_color}}{{@site.accent_color}}{{else}}#800020{{/if}};
-            {{#match @custom.typography "Sans-serif"}}
-                --gh-font-heading: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-                --gh-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-            {{else}}
-                --gh-font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
-                --gh-font-body: Georgia, 'Times New Roman', serif;
-            {{/match}}
+            --gh-font-heading: {{@site.typography.heading_font}};
+            --gh-font-body: {{@site.typography.body_font}};
 
             --gh-header-color: {{#if @custom.header_color}}{{@custom.header_color}}{{else}}#ffe4ec{{/if}};
             --gh-bg-color-start: {{#if @custom.background_color_start}}{{@custom.background_color_start}}{{else}}#fffef9{{/if}};
             --gh-bg-color-end: {{#if @custom.background_color_end}}{{@custom.background_color_end}}{{else}}#fff5dc{{/if}};
-
-            {{#match @custom.body_font_size "Small"}}
-                --gh-body-font-size: 1.4rem;
-            {{else match @custom.body_font_size "Large"}}
-                --gh-body-font-size: 1.8rem;
-            {{else}}
-                --gh-body-font-size: 1.6rem;
-            {{/match}}
 
             --gh-post-image-aspect-ratio: {{#if @custom.post_image_aspect_ratio}}{{@custom.post_image_aspect_ratio}}{{else}}4/3{{/if}};
 
@@ -176,15 +163,6 @@
         h1, h2, h3, h4, h5, h6, .gh-page-title, .gh-hero-title, .gh-card-title {
             font-family: var(--gh-font-heading);
         }
-
-        {{#match @custom.hero_height "Compact"}}
-        @media (min-width: 901px) {
-            .gh-hero-section, .gh-hero-container {
-                min-height: 400px !important;
-                max-height: 450px !important;
-            }
-        }
-        {{/match}}
 
         {{#match @custom.blog_title_position "Inside navigation"}}
         @media (min-width: 901px) {

@@ -150,11 +150,7 @@
                 ],
                 "default": "Original"
             },
-            "show_post_authors": {
-                "type": "boolean",
-                "default": true
-            },
-            "show_post_tags": {
+            "show_post_authors_and_tags": {
                 "type": "boolean",
                 "default": true
             },
@@ -187,18 +183,6 @@
                 "default": ""
             },
             "social_linkedin": {
-                "type": "text",
-                "default": ""
-            },
-            "social_telegram": {
-                "type": "text",
-                "default": ""
-            },
-            "social_whatsapp": {
-                "type": "text",
-                "default": ""
-            },
-            "social_threads": {
                 "type": "text",
                 "default": ""
             }
